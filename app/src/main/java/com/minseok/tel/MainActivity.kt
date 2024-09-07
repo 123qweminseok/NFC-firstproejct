@@ -17,7 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
-//아무렇게나
+//얍
 class MainActivity : AppCompatActivity() {
     //라라라라
 
