@@ -26,6 +26,8 @@ class ManagerActivity : AppCompatActivity() {
         database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
         fetchData()
+
+            //ㅎㅇㅎㅇ
     }
 
     private fun fetchData() {
