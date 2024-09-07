@@ -16,11 +16,11 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.minseok.tel.databinding.ActivityMainBinding
 
-//얍
+
 class MainActivity : AppCompatActivity() {
 
-    //gdgdgdgddddddddd 0947
     lateinit  var ManagerButton:Button //관리자 버튼
 
     private val REQUEST_CODE_READ_PHONE_STATE = 100
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_PHONE_NUMBERS), REQUEST_CODE_READ_PHONE_STATE)
         }
     }
-//테스트용 주석
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -53,14 +53,13 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         checkAndRequestPermissions()
 
-        val button = findViewById<Button>(R.id.button)
-        button.setOnClickListener {
-            val editTextPhone = findViewById<EditText>(R.id.editTextPhone)
-            val inputPhoneNumber = editTextPhone.text.toString()
+        binding.button.setOnClickListener {
+            val inputPhoneNumber = binding.editTextPhone.text.toString()
             if (inputPhoneNumber.isNotBlank()) {
                 getPhoneNumberAndCompare(inputPhoneNumber)
             } else {
@@ -69,8 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        ManagerButton=findViewById(R.id.button2)
-        ManagerButton.setOnClickListener{
+        binding.ManagerButton.setOnClickListener{
 
             val intent = Intent(this, ManagerActivity::class.java)
             startActivity(intent)

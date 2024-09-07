@@ -20,16 +20,17 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.minseok.tel.databinding.ActivityAdminBinding
 
 class AdminActivity : AppCompatActivity() {
 
     private lateinit var nfcAdapter: NfcAdapter
     private lateinit var pendingIntent: PendingIntent
     private lateinit var intentFilters: Array<IntentFilter>
-    private lateinit var textView: TextView
     private lateinit var firebaseDatabase: FirebaseDatabase
     private lateinit var databaseReference: DatabaseReference
     private lateinit var phoneNumberListener: ValueEventListener
+    private lateinit var binding: ActivityAdminBinding
 
 
     // To keep track of displayed phone numbers
@@ -37,15 +38,11 @@ class AdminActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_admin)
-
-        textView = findViewById(R.id.textView)
-
+        binding=ActivityAdminBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         firebaseDatabase = FirebaseDatabase.getInstance()
         databaseReference = firebaseDatabase.getReference("phoneNumber")
-
-
 
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         if (nfcAdapter == null) {
@@ -104,7 +101,7 @@ class AdminActivity : AppCompatActivity() {
                 if (records.isNotEmpty()) {
                     val payload = records[0].payload
                     val text = String(payload, Charsets.UTF_8)
-                    textView.text = text
+                    binding.textView.text = text
                     Toast.makeText(this, "Read data: $text", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "No records found in the tag", Toast.LENGTH_SHORT).show()
@@ -140,7 +137,7 @@ class AdminActivity : AppCompatActivity() {
                     newPhoneNumbers.forEach { phoneNumber ->
                         phoneNumbers.append(phoneNumber).append("\n")
                     }
-                    textView.text = phoneNumbers.toString()
+                    binding.textView.text = phoneNumbers.toString()
                     Toast.makeText(this@AdminActivity, "Phone numbers updated", Toast.LENGTH_SHORT).show()
                 }
             }
