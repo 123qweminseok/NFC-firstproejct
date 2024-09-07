@@ -39,13 +39,13 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:contentDescription="시간표 아이콘"
-                android:src="@drawable/sc" />
+                android:src="@drawable/ch" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="시간표"
+                android:text="출근"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -91,7 +91,7 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:contentDescription="쪽지보관함 아이콘"
-                android:src="@drawable/ms" />
+                android:src="@drawable/message" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:contentDescription="모바일신분증 아이콘"
-                android:src="@drawable/mn" />
+                android:src="@drawable/id" />
 
             <TextView
                 android:layout_width="wrap_content"
