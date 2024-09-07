@@ -88,10 +88,11 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             try {
                 val subscriptionManager = getSystemService(TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
-                val phoneNumber = subscriptionManager.getPhoneNumber(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID)
+                var phoneNumber = subscriptionManager.getPhoneNumber(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID)
 
                 if (phoneNumber != null) {
                     if (inputPhoneNumber == phoneNumber) {
+                        phoneNumber=phoneNumber.replace("+82","0")
                         Toast.makeText(this, "입력한 번호가 유심에 저장된 번호와 일치합니다.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, UserActivity::class.java)
                         intent.putExtra("PHONE_NUMBER", inputPhoneNumber)
@@ -110,10 +111,11 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             val telephonyManager = getSystemService(TELEPHONY_SERVICE) as TelephonyManager
-            val phoneNumber = telephonyManager.line1Number
+            var phoneNumber = telephonyManager.line1Number
 
             if (phoneNumber != null) {
                 if (inputPhoneNumber == phoneNumber) {
+                    phoneNumber=phoneNumber.replace("+82","0")
                     Toast.makeText(this, "입력한 번호가 유심에 저장된 번호와 일치합니다.", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, UserActivity::class.java)
                     intent.putExtra("PHONE_NUMBER", inputPhoneNumber)
