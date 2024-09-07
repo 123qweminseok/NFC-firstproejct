@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
+    //이희우, 김민석, 류기문 레츠고!!
+// NFC기능 추가 ㅇㅇㅇㅇㅇ
     lateinit  var ManagerButton:Button //관리자 버튼
 
     private val REQUEST_CODE_READ_PHONE_STATE = 100
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_PHONE_NUMBERS), REQUEST_CODE_READ_PHONE_STATE)
         }
     }
-
+//테스트용 주석
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
