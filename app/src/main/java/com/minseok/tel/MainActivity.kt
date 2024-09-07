@@ -16,7 +16,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
 class MainActivity : AppCompatActivity() {
 
     lateinit  var ManagerButton:Button //관리자 버튼
@@ -128,3 +127,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+//dddddddddd
