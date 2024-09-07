@@ -16,15 +16,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
+//ddddd
 class MainActivity : AppCompatActivity() {
 
-    //이희우, 김민석, 류기문 레츠고!!
-<<<<<<< HEAD
-// NFC기능 추가 ㅇㅇㅇㅇㅇdd
-=======
-
->>>>>>> 77c8bd8da0fe098cfd9aad3a7af741c97b903d51
     lateinit  var ManagerButton:Button //관리자 버튼
 
     private val REQUEST_CODE_READ_PHONE_STATE = 100
