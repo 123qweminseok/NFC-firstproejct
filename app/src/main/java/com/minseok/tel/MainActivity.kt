@@ -16,9 +16,11 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-//ddddddd
+
+//아무렇게나
 class MainActivity : AppCompatActivity() {
 
+    //gdgdgdgddddddddd 0947
     lateinit  var ManagerButton:Button //관리자 버튼
 
     private val REQUEST_CODE_READ_PHONE_STATE = 100
