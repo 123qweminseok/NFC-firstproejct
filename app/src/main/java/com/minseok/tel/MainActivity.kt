@@ -19,7 +19,7 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
-    //주석을 추가했습니다.
+    //이희우, 김민석, 류기문
 
     lateinit  var ManagerButton:Button //관리자 버튼
 
