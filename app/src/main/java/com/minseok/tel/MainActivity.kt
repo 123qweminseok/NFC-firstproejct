@@ -19,6 +19,8 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
+    //김민석, 이희우, 류기문
+
     lateinit  var ManagerButton:Button //관리자 버튼
 
     private val REQUEST_CODE_READ_PHONE_STATE = 100
