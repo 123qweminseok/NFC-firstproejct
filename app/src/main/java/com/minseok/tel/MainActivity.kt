@@ -16,10 +16,9 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
 class MainActivity : AppCompatActivity() {
 
-    //이희우, 김민석, 류기문 레츠고!!
+    //또 바꿨습니다
 
     lateinit  var ManagerButton:Button //관리자 버튼
 
