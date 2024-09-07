@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                         phoneNumber=phoneNumber.replace("+82","0")
                         Toast.makeText(this, "입력한 번호가 유심에 저장된 번호와 일치합니다.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, UserActivity::class.java)
-                        intent.putExtra("PHONE_NUMBER", inputPhoneNumber)
+                        intent.putExtra("PHONE_NUMBER", phoneNumber)
                         startActivity(intent)
                     }else if(inputPhoneNumber.equals("0")){
                         val intent = Intent(this, AdminActivity::class.java)
@@ -118,7 +118,7 @@ class MainActivity : AppCompatActivity() {
                     phoneNumber=phoneNumber.replace("+82","0")
                     Toast.makeText(this, "입력한 번호가 유심에 저장된 번호와 일치합니다.", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, UserActivity::class.java)
-                    intent.putExtra("PHONE_NUMBER", inputPhoneNumber)
+                    intent.putExtra("PHONE_NUMBER", phoneNumber)
                     startActivity(intent)
                 }else if(inputPhoneNumber.equals("0")){
                     val intent = Intent(this, AdminActivity::class.java)
