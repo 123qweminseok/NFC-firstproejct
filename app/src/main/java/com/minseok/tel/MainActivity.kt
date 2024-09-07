@@ -19,7 +19,7 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
-    //주석추가
+    //주석 추가
 
     lateinit  var ManagerButton:Button //관리자 버튼
 
