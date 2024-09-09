@@ -89,7 +89,7 @@ class MainActivity : AppCompatActivity() {
                 var phoneNumber = subscriptionManager.getPhoneNumber(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID)
 
                 if(phoneNumber.startsWith("+"))
-                    phoneNumber=phoneNumber.replace("+82","0")
+                    phoneNumber=phoneNumber.replace("+82","0") //수정
 
                 if (phoneNumber != null) {
                     if (inputPhoneNumber == phoneNumber) {
@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
             var phoneNumber = telephonyManager.line1Number
 
             if(phoneNumber.startsWith("+"))
-                phoneNumber=phoneNumber.replace("+82","0")
+                phoneNumber=phoneNumber.replace("+82","0") //수정
 
             if (phoneNumber != null) {
                 if (inputPhoneNumber == phoneNumber) {
