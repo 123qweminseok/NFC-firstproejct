@@ -1,4 +1,4 @@
-package com.example.tel
+package com.minseok.tel
 
 import android.app.PendingIntent
 import android.content.Intent
@@ -14,7 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
-import com.minseok.tel.R
+import com.minseok.tel.databinding.ActivityUserBinding
 
 class UserActivity : AppCompatActivity() {
 
@@ -27,7 +27,8 @@ class UserActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user)
+        var binding= ActivityUserBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();

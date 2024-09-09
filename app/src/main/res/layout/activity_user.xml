@@ -34,11 +34,10 @@
                 android:id="@+id/Attendance"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
-
                 android:background="@drawable/rounded_button"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/attendance" />
+                android:src="@drawable/attendance"/>
 
             <TextView
                 android:layout_width="wrap_content"
