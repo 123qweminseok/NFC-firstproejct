@@ -38,7 +38,7 @@
                 android:background="@drawable/rounded_button"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/Attendance" />
+                android:src="@drawable/attendance" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -62,7 +62,7 @@
                 android:background="@drawable/rounded_button"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
-                android:src="@drawable/Attendancestatus" />
+                android:src="@drawable/attendancestatus" />
 
             <TextView
                 android:layout_width="wrap_content"
