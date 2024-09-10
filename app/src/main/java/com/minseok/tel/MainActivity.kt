@@ -16,12 +16,11 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.tel.UserActivity
+import com.minseok.tel.databinding.ActivityMainBinding
 
-//아무렇게나
 class MainActivity : AppCompatActivity() {
 
-    //gdgdgdgddddddddd 0947
-    lateinit  var ManagerButton:Button //관리자 버튼
 
     private val REQUEST_CODE_READ_PHONE_STATE = 100
 
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_PHONE_NUMBERS), REQUEST_CODE_READ_PHONE_STATE)
         }
     }
-//테스트용 주석
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
@@ -53,14 +52,13 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         checkAndRequestPermissions()
 
-        val button = findViewById<Button>(R.id.button)
-        button.setOnClickListener {
-            val editTextPhone = findViewById<EditText>(R.id.editTextPhone)
-            val inputPhoneNumber = editTextPhone.text.toString()
+        binding.button.setOnClickListener {
+            val inputPhoneNumber = binding.editTextPhone.text.toString()
             if (inputPhoneNumber.isNotBlank()) {
                 getPhoneNumberAndCompare(inputPhoneNumber)
             } else {
@@ -69,8 +67,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        ManagerButton=findViewById(R.id.button2)
-        ManagerButton.setOnClickListener{
+        binding.ManagerButton.setOnClickListener{
 
             val intent = Intent(this, ManagerActivity::class.java)
             startActivity(intent)
@@ -88,13 +85,16 @@ class MainActivity : AppCompatActivity() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             try {
                 val subscriptionManager = getSystemService(TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
-                val phoneNumber = subscriptionManager.getPhoneNumber(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID)
+                var phoneNumber = subscriptionManager.getPhoneNumber(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID)
+
+                if(phoneNumber.startsWith("+"))
+                    phoneNumber=phoneNumber.replace("+82","0") //수정
 
                 if (phoneNumber != null) {
                     if (inputPhoneNumber == phoneNumber) {
                         Toast.makeText(this, "입력한 번호가 유심에 저장된 번호와 일치합니다.", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, UserActivity::class.java)
-                        intent.putExtra("PHONE_NUMBER", inputPhoneNumber)
+                        intent.putExtra("PHONE_NUMBER", phoneNumber)
                         startActivity(intent)
                     }else if(inputPhoneNumber.equals("0")){
                         val intent = Intent(this, AdminActivity::class.java)
@@ -110,13 +110,16 @@ class MainActivity : AppCompatActivity() {
             }
         } else {
             val telephonyManager = getSystemService(TELEPHONY_SERVICE) as TelephonyManager
-            val phoneNumber = telephonyManager.line1Number
+            var phoneNumber = telephonyManager.line1Number
+
+            if(phoneNumber.startsWith("+"))
+                phoneNumber=phoneNumber.replace("+82","0") //수정
 
             if (phoneNumber != null) {
                 if (inputPhoneNumber == phoneNumber) {
                     Toast.makeText(this, "입력한 번호가 유심에 저장된 번호와 일치합니다.", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this, UserActivity::class.java)
-                    intent.putExtra("PHONE_NUMBER", inputPhoneNumber)
+                    intent.putExtra("PHONE_NUMBER", phoneNumber)
                     startActivity(intent)
                 }else if(inputPhoneNumber.equals("0")){
                     val intent = Intent(this, AdminActivity::class.java)

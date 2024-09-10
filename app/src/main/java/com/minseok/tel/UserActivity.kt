@@ -1,4 +1,4 @@
-package com.minseok.tel
+package com.example.tel
 
 import android.app.PendingIntent
 import android.content.Intent
@@ -14,6 +14,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.minseok.tel.R
 
 class UserActivity : AppCompatActivity() {
 
