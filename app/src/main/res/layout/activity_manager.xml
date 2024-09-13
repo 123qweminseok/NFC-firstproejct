@@ -14,9 +14,42 @@
         android:layout_margin="16dp"
         android:clipToPadding="false"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/inputsLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/inputsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/editTextKey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="이름 입력"
+            android:inputType="text" />
+
+        <EditText
+            android:id="@+id/editTextValue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="전화번호 입력"
+            android:inputType="text" />
+
+        <Button
+            android:id="@+id/buttonConfirm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="확인" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
