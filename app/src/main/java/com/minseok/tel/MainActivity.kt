@@ -69,6 +69,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ManagerActivity::class.java)
             startActivity(intent)
         }
+
+
+
     }
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)

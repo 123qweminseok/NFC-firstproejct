@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#1E88E5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/backButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Back"
+             />
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="16dp">
+
+            <ImageView
+                android:id="@+id/userImageView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@android:drawable/ic_menu_camera"
+                android:background="#424242"
+                android:padding="24dp" />
+
+            <View
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="bottom|end" />
+        </FrameLayout>
+
+        <Button
+            android:backgroundTint="@color/cardview_shadow_start_color"
+            android:id="@+id/selectImageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="이미지 선택"
+            android:textColor="#FFFFFF"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#000000"
+            android:padding="16dp">
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="프로필"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:layout_marginBottom="16dp" />
+
+            <EditText
+                android:id="@+id/nameEditText"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="8dp" />
+
+            <EditText
+                android:id="@+id/residentNumberEditText"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="주민등록번호"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="생일 추가"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="16dp" />
+
+            <TextView
+                android:id="@+id/addressEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="기타"
+                android:textColor="#AAAAAA"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="기타 방법으로 사용자가 나를 찾기"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="도움말 및 피드백"
+                android:textColor="#FFFFFF"
+                android:layout_marginBottom="8dp" />
+
+        </LinearLayout>
+
+<Button
+    android:layout_gravity="center"
+    android:backgroundTint="@color/cardview_shadow_start_color"
+    android:id="@+id/saveButton"
+    android:text="저장하기"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+</Button>
+
+    </LinearLayout>
+
+</ScrollView>
