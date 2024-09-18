@@ -74,18 +74,20 @@
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="이름"
+                android:layout_marginBottom="8dp"
+                android:hint="이름"
                 android:textColor="#AAAAAA"
-                android:layout_marginBottom="8dp" />
+                android:textColorHint="#AAAAAA" />
 
             <EditText
                 android:id="@+id/residentNumberEditText"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="주민등록번호"
+                android:layout_marginBottom="8dp"
+                android:hint="주민등록번호"
                 android:textColor="#AAAAAA"
-                android:layout_marginBottom="8dp" />
+                android:textColorHint="#AAAAAA" />
 
             <TextView
                 android:layout_width="match_parent"
