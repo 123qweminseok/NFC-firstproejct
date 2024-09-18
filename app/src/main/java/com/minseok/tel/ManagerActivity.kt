@@ -1,7 +1,9 @@
 package com.minseok.tel
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
@@ -10,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
 import javax.crypto.BadPaddingException
 import javax.crypto.SecretKey
+import javax.crypto.spec.SecretKeySpec
 
 class ManagerActivity : AppCompatActivity() {
 
@@ -21,7 +24,7 @@ class ManagerActivity : AppCompatActivity() {
     private lateinit var editTextValue: EditText
     private lateinit var buttonConfirm: Button
 
-    private val secretKey: SecretKey = EncryptionUtil.generateKey()
+    private lateinit var secretKey: SecretKey
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +43,12 @@ class ManagerActivity : AppCompatActivity() {
         val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
         database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
+        secretKey = loadKey() ?: run {
+            val newKey = EncryptionUtil.generateKey()
+            saveKey(newKey)
+            newKey
+        }
+
         buttonConfirm.setOnClickListener {
             val key = editTextKey.text.toString()
             val value = editTextValue.text.toString()
@@ -53,20 +62,22 @@ class ManagerActivity : AppCompatActivity() {
     }
 
     private fun saveDataToFirebase(key: String, value: String) {
-        val encryptedKey = EncryptionUtil.encrypt(key, secretKey)
-        val encryptedValue = EncryptionUtil.encrypt(value, secretKey)
+        try {
+            val encryptedKey = EncryptionUtil.encrypt(key, secretKey)
+            val encryptedValue = EncryptionUtil.encrypt(value, secretKey)
 
-        val data = mapOf("key" to encryptedKey, "value" to encryptedValue)
-        database.push().setValue(data)
-            .addOnSuccessListener {
-                Log.d("FirebaseData", "Data saved successfully")
-            }
-            .addOnFailureListener { exception ->
-                Log.e("FirebaseError", "Error saving data", exception)
-            }
+            val data = mapOf("key" to encryptedKey, "value" to encryptedValue)
+            database.push().setValue(data)
+                .addOnSuccessListener {
+                    Log.d("FirebaseData", "Data saved successfully")
+                }
+                .addOnFailureListener { exception ->
+                    Log.e("FirebaseError", "Error saving data", exception)
+                }
+        } catch (e: Exception) {
+            Log.e("EncryptionError", "Error encrypting data", e)
+        }
     }
-
-
 
     private fun fetchData() {
         database.addValueEventListener(object : ValueEventListener {
@@ -92,6 +103,21 @@ class ManagerActivity : AppCompatActivity() {
                 Log.e("FirebaseError", "Error fetching data", error.toException())
             }
         })
+    }
+
+    private fun saveKey(key: SecretKey) {
+        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val encodedKey = Base64.encodeToString(key.encoded, Base64.DEFAULT)
+        editor.putString("encryption_key", encodedKey)
+        editor.apply()
+    }
+
+    private fun loadKey(): SecretKey? {
+        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
+        val encodedKey = sharedPreferences.getString("encryption_key", null) ?: return null
+        val decodedKey = Base64.decode(encodedKey, Base64.DEFAULT)
+        return SecretKeySpec(decodedKey, "AES")
     }
 
 }

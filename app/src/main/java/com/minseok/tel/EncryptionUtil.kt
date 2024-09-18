@@ -9,7 +9,7 @@ import android.util.Base64
 object EncryptionUtil {
 
     private const val ALGORITHM = "AES"
-    private const val TRANSFORMATION = "AES"
+    private const val TRANSFORMATION = "AES/ECB/PKCS5Padding"
 
     // Generate a new AES key (should be securely stored and managed in a real application)
     fun generateKey(): SecretKey {
