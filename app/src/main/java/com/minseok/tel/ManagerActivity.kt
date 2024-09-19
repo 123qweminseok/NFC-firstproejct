@@ -7,6 +7,7 @@ import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -62,22 +63,40 @@ class ManagerActivity : AppCompatActivity() {
     }
 
     private fun saveDataToFirebase(key: String, value: String) {
-        try {
-            val encryptedKey = EncryptionUtil.encrypt(key, secretKey)
-            val encryptedValue = EncryptionUtil.encrypt(value, secretKey)
+        // 먼저 데이터베이스에서 중복된 값이 있는지 확인
+        database.orderByChild("value").equalTo(EncryptionUtil.encrypt(value, secretKey))
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        // 데이터가 이미 존재하면 저장하지 않음
+                        Toast.makeText(this@ManagerActivity, "이미 존재하는 번호입니다.", Toast.LENGTH_SHORT).show()
+                        Log.d("FirebaseData", "Value already exists in the database")
+                    } else {
+                        // 중복되지 않으면 저장
+                        try {
+                            val encryptedKey = EncryptionUtil.encrypt(key, secretKey)
+                            val encryptedValue = EncryptionUtil.encrypt(value, secretKey)
 
-            val data = mapOf("key" to encryptedKey, "value" to encryptedValue)
-            database.push().setValue(data)
-                .addOnSuccessListener {
-                    Log.d("FirebaseData", "Data saved successfully")
+                            val data = mapOf("key" to encryptedKey, "value" to encryptedValue)
+                            database.push().setValue(data)
+                                .addOnSuccessListener {
+                                    Log.d("FirebaseData", "Data saved successfully")
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.e("FirebaseError", "Error saving data", exception)
+                                }
+                        } catch (e: Exception) {
+                            Log.e("EncryptionError", "Error encrypting data", e)
+                        }
+                    }
                 }
-                .addOnFailureListener { exception ->
-                    Log.e("FirebaseError", "Error saving data", exception)
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("FirebaseError", "Error checking for existing data", error.toException())
                 }
-        } catch (e: Exception) {
-            Log.e("EncryptionError", "Error encrypting data", e)
-        }
+            })
     }
+
 
     private fun fetchData() {
         database.addValueEventListener(object : ValueEventListener {
