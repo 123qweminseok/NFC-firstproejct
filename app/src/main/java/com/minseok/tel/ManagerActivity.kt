@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.database.*
@@ -33,7 +34,7 @@ class ManagerActivity : AppCompatActivity() {
 
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        dataAdapter = DataAdapter(emptyList())
+        dataAdapter = DataAdapter(emptyList()) { item -> showDeleteConfirmationDialog(item) }
         recyclerView.adapter = dataAdapter
 
         editTextKey = findViewById(R.id.editTextKey)
@@ -60,6 +61,37 @@ class ManagerActivity : AppCompatActivity() {
 
         fetchData()
 
+    }
+
+    private fun showDeleteConfirmationDialog(item: DataItem) {
+        AlertDialog.Builder(this)
+            .setTitle("삭제 확인")
+            .setMessage("${item.id}님을 삭제하시겠습니까?")
+            .setPositiveButton("확인") { _, _ -> deleteItem(item) }
+            .setNegativeButton("취소", null)
+            .show()
+    }
+
+    private fun deleteItem(item: DataItem) {
+        database.orderByChild("value").equalTo(EncryptionUtil.encrypt(item.value, secretKey))
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    for (childSnapshot in snapshot.children) {
+                        childSnapshot.ref.removeValue()
+                            .addOnSuccessListener {
+                                Toast.makeText(this@ManagerActivity, "삭제되었습니다.", Toast.LENGTH_SHORT).show()
+                                fetchData() // 데이터 새로고침
+                            }
+                            .addOnFailureListener { exception ->
+                                Toast.makeText(this@ManagerActivity, "삭제 실패: ${exception.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
+                }
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.e("FirebaseError", "Error deleting data", error.toException())
+                }
+            })
     }
 
     private fun saveDataToFirebase(key: String, value: String) {
