@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity() {
         // 암호화 키 로드
         secretKey = loadKey()
 
-        binding.button.setOnClickListener {
-            val inputPhoneNumber = binding.editTextPhone.text.toString()
+        binding.loginButton.setOnClickListener {
+            val inputPhoneNumber = binding.studentId.text.toString()
             if (inputPhoneNumber.isNotBlank()) {
                 getPhoneNumberAndCompare(inputPhoneNumber)
             } else {
