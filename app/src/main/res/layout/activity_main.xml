@@ -35,9 +35,9 @@
             android:id="@+id/student_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
             android:hint="전화번호"
-            android:inputType="text"
-            android:layout_marginTop="32dp"/>
+            android:inputType="phone" />
 
         <CheckBox
             android:id="@+id/save_credentials"
