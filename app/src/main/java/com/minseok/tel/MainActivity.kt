@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                 if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                     // 권한이 허용되었을 때 추가 작업 필요 없음
                 } else {
-                    Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show()
+                    //ㅇㅇ 비어둠
                 }
                 return
             }
