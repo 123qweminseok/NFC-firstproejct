@@ -24,6 +24,8 @@
     import com.google.firebase.database.DatabaseReference
     import com.google.firebase.database.FirebaseDatabase
     import com.minseok.tel.databinding.ActivityUserBinding
+    import javax.crypto.SecretKey
+    import javax.crypto.spec.SecretKeySpec
 
     class UserActivity : AppCompatActivity() {
 
@@ -31,18 +33,23 @@
         private lateinit var pendingIntent: PendingIntent
         private lateinit var intentFilters: Array<IntentFilter>
         private lateinit var phoneNumber: String
-        private lateinit var firebaseDatabase: FirebaseDatabase
-        private lateinit var databaseReference: DatabaseReference
         private lateinit var nextmessage: ImageButton
         private lateinit var mobileImage: ImageButton
+        private lateinit var database: DatabaseReference
+        private lateinit var secretKey: SecretKey
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             var binding= ActivityUserBinding.inflate(layoutInflater)
             setContentView(binding.root)
             nextmessage=findViewById(R.id.message)
-            firebaseDatabase = FirebaseDatabase.getInstance();
-            databaseReference = firebaseDatabase.getReference();
+
+            //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
+            val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
+            database = FirebaseDatabase.getInstance(firebaseUrl).reference
+
+            // 암호화 키 로드
+            secretKey = loadKey()
 
             nfcAdapter = NfcAdapter.getDefaultAdapter(this)
             if (nfcAdapter == null) {
@@ -77,12 +84,15 @@
             })
 
             binding.id.setOnClickListener{
-
                 val intent = Intent(this, MoblieSin::class.java)
                 startActivity(intent)
             }
 
-
+            binding.attendance.setOnClickListener{
+                val intent = Intent(this, AttendanceActivity::class.java)
+                intent.putExtra("PHONE_NUMBER", phoneNumber)
+                startActivity(intent)
+            }
 
             val textView = findViewById<TextView>(R.id.textView3)
 
@@ -99,10 +109,6 @@
             // 애니메이션 적용
             val animation = AnimationUtils.loadAnimation(this, R.anim.text_animation)
             textView.startAnimation(animation)
-
-
-
-
         }
 
         override fun onResume() {
@@ -133,7 +139,7 @@
         private fun writePhoneNumberToTag(tag: Tag) {
             val ndef = Ndef.get(tag) ?: run {
                 Toast.makeText(this, "NDEF is not supported on this tag.", Toast.LENGTH_SHORT).show()
-                databaseReference.child("phoneNumber").push().setValue(phoneNumber)
+                saveAttendance(phoneNumber) // 전화번호 저장
                 return
             }
             val message = NdefMessage(
@@ -159,5 +165,33 @@
             } finally {
                 ndef.close()
             }
+        }
+
+        private fun saveAttendance(phoneNumber: String) {
+            val encryptedPhoneNumber = EncryptionUtil.encrypt(phoneNumber, secretKey)
+
+            val currentTime = System.currentTimeMillis()
+            val timestamp = java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss", java.util.Locale.getDefault()).format(java.util.Date(currentTime))
+
+            val encryptedTimestmp = EncryptionUtil.encrypt(timestamp, secretKey)
+
+            val attendanceData = mapOf(
+                "phoneNumber" to encryptedPhoneNumber,
+                "timestamp" to encryptedTimestmp
+            )
+
+            database.child("attendance").push().setValue(attendanceData)
+                .addOnSuccessListener {
+                    Toast.makeText(this, "Attendance saved successfully.", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(this, "Failed to save attendance: ${exception.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+        private fun loadKey(): SecretKey {
+            val fixedKeyString = "12345678901234567890123456789012" // 고정된 키
+            val fixedKey = fixedKeyString.toByteArray(Charsets.UTF_8)
+            return SecretKeySpec(fixedKey, "AES")
         }
     }

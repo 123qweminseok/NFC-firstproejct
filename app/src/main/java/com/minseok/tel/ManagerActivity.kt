@@ -131,16 +131,19 @@ class ManagerActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val items = mutableListOf<DataItem>()
                 for (childSnapshot in snapshot.children) {
-                    val encryptedKey = childSnapshot.child("key").getValue(String::class.java) ?: ""
-                    val encryptedValue = childSnapshot.child("value").getValue(String::class.java) ?: ""
+                    // 현재 노드가 "attendance"인지 확인
+                    if (childSnapshot.key != "attendance") {
+                        val encryptedKey = childSnapshot.child("key").getValue(String::class.java) ?: ""
+                        val encryptedValue = childSnapshot.child("value").getValue(String::class.java) ?: ""
 
-                    try {
-                        val key = EncryptionUtil.decrypt(encryptedKey, secretKey)
-                        val value = EncryptionUtil.decrypt(encryptedValue, secretKey)
-                        items.add(DataItem(key, value))
-                        Log.d("FirebaseData", "Key: $key, Value: $value")
-                    } catch (e: BadPaddingException) {
-                        Log.e("EncryptionError", "Error decrypting data", e)
+                        try {
+                            val key = EncryptionUtil.decrypt(encryptedKey, secretKey)
+                            val value = EncryptionUtil.decrypt(encryptedValue, secretKey)
+                            items.add(DataItem(key, value))
+                            Log.d("FirebaseData", "Key: $key, Value: $value")
+                        } catch (e: BadPaddingException) {
+                            Log.e("EncryptionError", "Error decrypting data", e)
+                        }
                     }
                 }
                 dataAdapter.updateItems(items)
@@ -151,6 +154,7 @@ class ManagerActivity : AppCompatActivity() {
             }
         })
     }
+
 
     private fun loadKey(): SecretKey {
         val fixedKeyString = "12345678901234567890123456789012" // 고정된 키
