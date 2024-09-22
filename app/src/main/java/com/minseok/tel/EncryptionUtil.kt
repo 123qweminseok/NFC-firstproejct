@@ -11,12 +11,11 @@ object EncryptionUtil {
     private const val ALGORITHM = "AES"
     private const val TRANSFORMATION = "AES/ECB/PKCS5Padding"
 
-    // Generate a new AES key (should be securely stored and managed in a real application)
-    fun generateKey(): SecretKey {
-        val keyGenerator = KeyGenerator.getInstance(ALGORITHM)
-        keyGenerator.init(256) // 256-bit AES
-        return keyGenerator.generateKey()
-    }
+    // 고정된 키 (예: 32바이트)
+    private val fixedKey = "12345678901234567890123456789012".toByteArray(Charsets.UTF_8)
+
+    // SecretKey 생성
+    private val secretKey: SecretKey = SecretKeySpec(fixedKey, ALGORITHM)
 
     fun encrypt(data: String, key: SecretKey): String {
         val cipher = Cipher.getInstance(TRANSFORMATION)

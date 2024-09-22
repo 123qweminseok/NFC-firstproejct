@@ -45,11 +45,7 @@ class ManagerActivity : AppCompatActivity() {
         val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
         database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
-        secretKey = loadKey() ?: run {
-            val newKey = EncryptionUtil.generateKey()
-            saveKey(newKey)
-            newKey
-        }
+        secretKey = loadKey()
 
         buttonConfirm.setOnClickListener {
             val key = editTextKey.text.toString()
@@ -156,19 +152,10 @@ class ManagerActivity : AppCompatActivity() {
         })
     }
 
-    private fun saveKey(key: SecretKey) {
-        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val encodedKey = Base64.encodeToString(key.encoded, Base64.DEFAULT)
-        editor.putString("encryption_key", encodedKey)
-        editor.apply()
-    }
-
-    private fun loadKey(): SecretKey? {
-        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-        val encodedKey = sharedPreferences.getString("encryption_key", null) ?: return null
-        val decodedKey = Base64.decode(encodedKey, Base64.DEFAULT)
-        return SecretKeySpec(decodedKey, "AES")
+    private fun loadKey(): SecretKey {
+        val fixedKeyString = "12345678901234567890123456789012" // 고정된 키
+        val fixedKey = fixedKeyString.toByteArray(Charsets.UTF_8)
+        return SecretKeySpec(fixedKey, "AES")
     }
 
 }
