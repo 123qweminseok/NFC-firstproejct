@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 위쪽 1/3 배경 이미지 -->
+    <item
+        android:drawable="@drawable/andrometa"
+        android:bottom="200dp"  />
+    <item
+        android:drawable="@drawable/space"
+        android:top="200dp"  />
+</layer-list>
