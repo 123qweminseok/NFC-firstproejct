@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="196dp"
         android:fontFamily="sans-serif-condensed"
-        android:text="SKU 출결"
+        android:text="SKU 스마트출결"
         android:textColor="@color/sky"
         android:textSize="36sp"
         android:textStyle="bold"
