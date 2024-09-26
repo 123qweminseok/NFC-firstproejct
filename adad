@@ -1,0 +1,19 @@
+[33mc79ae90[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{0}: reset: moving to origin/master
+[33me2fab7c[m HEAD@{1}: commit: 디자인 바꿈
+[33m0d0dfab[m HEAD@{2}: rebase (abort): returning to refs/heads/master
+[33mc79ae90[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m HEAD@{3}: pull origin master --rebase (start): checkout c79ae901b23dfe0423166aca645a090d6c8a18d8
+[33m0d0dfab[m HEAD@{4}: reset: moving to HEAD
+[33m0d0dfab[m HEAD@{5}: commit: change xml
+[33m6fbda1e[m HEAD@{6}: checkout: moving from main to master
+[33md8c8dbc[m HEAD@{7}: checkout: moving from master to main
+[33m6fbda1e[m HEAD@{8}: checkout: moving from main to master
+[33md8c8dbc[m HEAD@{9}: checkout: moving from master to main
+[33m6fbda1e[m HEAD@{10}: checkout: moving from main to master
+[33md8c8dbc[m HEAD@{11}: commit: 디자인 바꿈
+[33m6fbda1e[m HEAD@{12}: checkout: moving from master to main
+[33m6fbda1e[m HEAD@{13}: commit: Resolve merge conflicts
+[33ma543a32[m HEAD@{14}: commit: 1
+[33m210acca[m HEAD@{15}: commit: first commit
+[33mb7770be[m HEAD@{16}: commit (amend): first commit
+[33m586c6ae[m HEAD@{17}: commit: first commit
+[33m8456edf[m HEAD@{18}: commit (initial): first commit
