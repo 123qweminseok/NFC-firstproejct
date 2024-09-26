@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    id("com.google.gms.google-services")
-    kotlin("kapt")
+     id("com.google.gms.google-services")
 }
 
 android {
@@ -39,10 +38,9 @@ android {
 }
 
 dependencies {
-    implementation("com.github.bumptech.glide:glide:4.12.0")
-    kapt("com.github.bumptech.glide:compiler:4.12.0")
-    implementation("com.google.firebase:firebase-storage-ktx:20.0.1")
-    implementation("com.google.code.gson:gson:2.8.9")
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    implementation ("com.google.firebase:firebase-storage-ktx:20.0.1")
+    implementation ("com.google.code.gson:gson:2.8.9")
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:33.2.0"))
     implementation("com.google.firebase:firebase-database-ktx")
@@ -57,4 +55,3 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 }
-//11
