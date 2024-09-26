@@ -1,0 +1,299 @@
+[33mcommit c79ae901b23dfe0423166aca645a090d6c8a18d8[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: [Github <[Github>
+Date:   Sun Sep 22 17:10:55 2024 +0900
+
+    출결
+
+[33mcommit a012e7bd1d821a130cdec8dd59d2582035daa052[m
+Author: [Github <[Github>
+Date:   Sun Sep 22 14:54:51 2024 +0900
+
+    암호 다시 수정
+
+[33mcommit 7d9dc46dac48eab47e5d4c551fb646940b084360[m
+Author: [Github <[Github>
+Date:   Sat Sep 21 13:12:14 2024 +0900
+
+    매니페스트 권한 추가
+
+[33mcommit 5e9395fbc36865e4e9bd5f6766225cdd6ce89beb[m
+Merge: 9e47b96 d0354ea
+Author: [Github <[Github>
+Date:   Sat Sep 21 12:56:02 2024 +0900
+
+    Merge branch 'master' of https://github.com/123qweminseok/NFC-firstproejct
+
+[33mcommit d0354ea2d33222b9990470c77819f036ecf73bb4[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Sat Sep 21 03:49:20 2024 +0900
+
+    gdgd
+
+[33mcommit 067c29e2b7fcce9e5d387ed4713af32cefc33da9[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Sat Sep 21 03:02:32 2024 +0900
+
+    gdg
+
+[33mcommit 9e47b96b2e6593e2dcbacb3d9712441448c06ab7[m
+Author: [Github <[Github>
+Date:   Thu Sep 19 17:46:13 2024 +0900
+
+    쓰레기통 아이콘을 누르면 파이어베이스에서 삭제
+
+[33mcommit cab3674148d3cb5e892cdd176446365915908631[m
+Author: [Github <[Github>
+Date:   Thu Sep 19 17:33:41 2024 +0900
+
+    중복 번호 저장 불가 및 리사이클러뷰에 쓰레기통 아이콘 추가(추후 데이터 삭제기능 적용)
+
+[33mcommit 519066c38c183213b5e71c5ff9db42a686e38f44[m
+Author: [Github <[Github>
+Date:   Thu Sep 19 16:45:14 2024 +0900
+
+    리더기모드 사용할수있게 수정
+
+[33mcommit 589a34eb7e3b159c0714b856d46cf31fb442d64e[m
+Author: [Github <[Github>
+Date:   Thu Sep 19 15:32:50 2024 +0900
+
+    xml 아이디 바뀐거 수정
+
+[33mcommit 20cd93f763ac12144c3d9b545c8987ce556fbe58[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Thu Sep 19 15:24:06 2024 +0900
+
+    gd
+
+[33mcommit f82aa40875f201557b602106d05dd89acb68b78d[m
+Author: [Github <[Github>
+Date:   Thu Sep 19 00:02:36 2024 +0900
+
+    유심과 일치하는 번호라도 회원정보에 존재하지않으면 더이상 로그인을 할수없게 수정
+
+[33mcommit ce5078d77f411b39dbfbfa820109c6027976f15b[m
+Author: [Github <[Github>
+Date:   Wed Sep 18 17:22:17 2024 +0900
+
+    암호화랑 ui수정
+
+[33mcommit 9fbe2395c5dc7f3634d51302bcee6d8645317fb9[m
+Author: [Github <[Github>
+Date:   Wed Sep 18 16:37:06 2024 +0900
+
+    암호화 수정완료
+
+[33mcommit 14e2d56826580f8350e2699e10d04db14b880569[m
+Merge: 1114cb0 b4dc820
+Author: [Github <[Github>
+Date:   Fri Sep 13 19:38:24 2024 +0900
+
+    Merge branch 'master' of https://github.com/123qweminseok/NFC-firstproejct
+    
+    # Conflicts:
+    #       .idea/deploymentTargetSelector.xml
+
+[33mcommit 1114cb05f82a538e6618f8c01b9a9263ca3ec1ca[m
+Author: [Github <[Github>
+Date:   Fri Sep 13 19:36:02 2024 +0900
+
+    암호화(미완)
+
+[33mcommit b4dc82023cc7bcf3399592956f14901b61288ca6[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Fri Sep 13 19:13:52 2024 +0900
+
+    Gdgd
+
+[33mcommit 2135ac03be42c12e88d38e6fd2bb239dc6442c73[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Fri Sep 13 18:49:11 2024 +0900
+
+    master
+
+[33mcommit 80efac7b0b54df3cd1bab11655a84698f7c8888e[m
+Merge: 88bd509 e16bc6a
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Fri Sep 13 17:47:12 2024 +0900
+
+    변경
+
+[33mcommit 88bd50954bb46dfcc5cbf94800b8b596d2cde6d8[m
+Merge: 37e7d79 3379f2f
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Tue Sep 10 13:26:51 2024 +0900
+
+    gdgd
+
+[33mcommit e16bc6a8dc722c7eb0a1e3a7aa2b7ba7fb5d2329[m
+Author: [Github <[Github>
+Date:   Mon Sep 9 20:26:43 2024 +0900
+
+    최근 수정 2024-09-09 8:26
+
+[33mcommit b67a68e67e2adb61d12d08e5b27e9f22df3b1c6d[m
+Author: [Github <[Github>
+Date:   Mon Sep 9 19:24:53 2024 +0900
+
+    최근 수정 2024-09-09
+
+[33mcommit 37e7d79fd05308cca0a42f5f0a515e4462141199[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Mon Sep 9 19:17:18 2024 +0900
+
+    Merge
+
+[33mcommit 3379f2f1f16247b58c542f2bdf07dda4c3e9cbca[m
+Author: [Github <[Github>
+Date:   Mon Sep 9 18:54:09 2024 +0900
+
+    최근 수정 2024-09-09
+
+[33mcommit b1fc343c2a50417490792cd162d15af79e10d8fe[m
+Merge: ff632da 2f1b4fc
+Author: [Github <[Github>
+Date:   Mon Sep 9 17:35:05 2024 +0900
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit ff632daa2e4851c8147de4d74cba91bb3b4c3bf7[m
+Author: [Github <[Github>
+Date:   Mon Sep 9 17:34:45 2024 +0900
+
+    코드 잘못짠거 수정
+
+[33mcommit e98f579e1b3abb2d1efb14fe97037fbae3a66db9[m
+Author: [Github <[Github>
+Date:   Mon Sep 9 17:31:25 2024 +0900
+
+    코드 잘못짠거 수정
+
+[33mcommit 2f1b4fccf647002c45f8929f0de365e88a642dac[m
+Author: ryu <gimun05@naver.com>
+Date:   Sun Sep 8 18:39:41 2024 +0900
+
+    바꿈요
+
+[33mcommit 3b20daed21b09bbb2d0a9b0905e6b71b0b9b046d[m
+Merge: db98ab5 8b5bbc7
+Author: ryu <gimun05@naver.com>
+Date:   Sun Sep 8 18:37:29 2024 +0900
+
+    Merge remote-tracking branch 'origin/master'
+
+[33mcommit db98ab589ea81f334bf7cb0315d24c4cb452e7fc[m
+Author: ryu <gimun05@naver.com>
+Date:   Sun Sep 8 18:37:14 2024 +0900
+
+    바꿈요
+
+[33mcommit 8b5bbc72b5ef7c43a742592fadadf545ea77b3aa[m
+Author: [Github <[Github>
+Date:   Sat Sep 7 23:27:49 2024 +0900
+
+    바인딩 했는데 조금 더 해야함
+
+[33mcommit 7f89d3c200cae8156e13684a27a90653533d817c[m
+Author: ryu <gimun05@naver.com>
+Date:   Sat Sep 7 23:08:35 2024 +0900
+
+    바꿈요
+
+[33mcommit 82857c2e80ee1358418a950069423cfceb30b0e6[m
+Author: ryu <gimun05@naver.com>
+Date:   Sat Sep 7 22:24:15 2024 +0900
+
+    바꿈요
+
+[33mcommit e3c759b05592b47bdcc4c6e416c117e1de790dfb[m
+Author: ryu <gimun05@naver.com>
+Date:   Sat Sep 7 22:23:53 2024 +0900
+
+    바꿈요
+
+[33mcommit 11d5f1602caa6579662289116949807a2a79c72e[m
+Author: [Github <[Github>
+Date:   Sat Sep 7 22:21:26 2024 +0900
+
+    로그인시 +82가 0으로 바뀌게 수정~
+
+[33mcommit 920ae3694c3906edc3542e5acd0b02fe19d4cf0d[m
+Author: [Github <[Github>
+Date:   Sat Sep 7 22:20:15 2024 +0900
+
+    로그인시 +82가 0으로 바뀌게 수정
+
+[33mcommit 751d7f3c2b50c13244daf2daf6e0f35ccd0cb7ca[m
+Author: ryu <gimun05@naver.com>
+Date:   Sat Sep 7 22:00:12 2024 +0900
+
+    얍
+
+[33mcommit 45be8fd82c71f84dddf4756944fbc86605a3a2f2[m
+Merge: e8e124b f38998c
+Author: ryu <gimun05@naver.com>
+Date:   Sat Sep 7 21:56:54 2024 +0900
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #       app/src/main/java/com/minseok/tel/MainActivity.kt
+
+[33mcommit e8e124ba8f44485b0ba315ccbe707199f9bab0b5[m
+Author: ryu <gimun05@naver.com>
+Date:   Sat Sep 7 21:56:36 2024 +0900
+
+    아무렇게나
+
+[33mcommit 2e6cfed9187627171bf18f79a8ae749c15b7be5b[m
+Author: ryu <gimun05@naver.com>
+Date:   Sat Sep 7 21:52:51 2024 +0900
+
+    변경 사항을 커밋합니다.
+
+[33mcommit f38998c00ffcbd840ad89bf9b12629be0da79ff4[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Sat Sep 7 21:50:29 2024 +0900
+
+    지금 날려요
+
+[33mcommit a600d240566d2c48aa884a78db4058f0154cc1da[m
+Author: ryu <gimun05@naver.com>
+Date:   Sat Sep 7 21:45:08 2024 +0900
+
+    뭐라노
+
+[33mcommit 40f0f06507b647f7a64580532ee2135161c9bb1f[m
+Merge: 86d5638 77c8bd8
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Sat Sep 7 21:17:53 2024 +0900
+
+    Merge remote changes and resolve conflicts
+
+[33mcommit 86d56385adae63b37a28f7d71d35404890cd9020[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Sat Sep 7 21:15:17 2024 +0900
+
+    good
+
+[33mcommit 77c8bd8da0fe098cfd9aad3a7af741c97b903d51[m
+Merge: 68b0fbe e85f2f8
+Author: minseokkimgood <133623979+123qweminseok@users.noreply.github.com>
+Date:   Sat Sep 7 20:57:55 2024 +0900
+
+    Merge pull request #2 from 123qweminseok/freshman
+    
+    second commit
+
+[33mcommit e85f2f89b84c9b0e5c8de9569fd739bef18d0f74[m
+Author: Minseok Kim <everybetter@naver.com>
+Date:   Sat Sep 7 20:54:15 2024 +0900
+
+    second commit
+
+[33mcommit 68b0fbee9c88423fa77b91a887735f87002c9755[m
+Merge: 3c4c805 4870687
+Author: minseokkimgood <133623979+123qweminseok@users.noreply.github.com>
+Date:   Sat Sep 7 20:52:30 2024 +0900
+
+    Merge pull request #1 from 123qwemin

@@ -42,14 +42,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="전화번호 입력"
-            android:inputType="phone" />
+            android:inputType="text" />
 
         <Button
             android:id="@+id/buttonConfirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="확인" />
+            android:text="확인"
+            android:backgroundTint="@color/sky"/>
 
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- 1-->
