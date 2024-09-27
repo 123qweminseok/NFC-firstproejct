@@ -71,12 +71,14 @@
             android:textColor="@android:color/darker_gray"
             android:layout_gravity="center"/>
     </LinearLayout>
+
     <Button
         android:id="@+id/ManagerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/sky"
         android:text="관리자모드"
-        android:backgroundTint="@color/sky" />
+        android:visibility="gone" />
 
 </LinearLayout>
     <!-- 1-->

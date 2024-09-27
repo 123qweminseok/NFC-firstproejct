@@ -58,7 +58,7 @@ class AttendanceActivity : AppCompatActivity() {
                             val phoneNumber = EncryptionUtil.decrypt(encryptedPhoneNumber, secretKey)
                             val timestamp = EncryptionUtil.decrypt(encryptedTimestamp, secretKey)
 
-                            attendanceList.add(AttendanceItem(name, phoneNumber, timestamp))
+                            attendanceList.add(0,AttendanceItem(name, phoneNumber, timestamp))
                         } catch (e: BadPaddingException) {
                             Log.e("EncryptionError", "Error decrypting data", e)
                         }

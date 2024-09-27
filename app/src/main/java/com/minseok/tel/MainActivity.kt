@@ -10,6 +10,7 @@ import android.telephony.SubscriptionManager
 import android.telephony.TelephonyManager
 import android.util.Base64
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -30,6 +31,7 @@ class MainActivity : AppCompatActivity() {
     private val REQUEST_CODE_READ_PHONE_STATE = 100
     private lateinit var database: DatabaseReference
     private var secretKey: SecretKey? = null
+    private lateinit var binding: ActivityMainBinding
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun checkAndRequestPermissions() {
@@ -59,7 +61,7 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         checkAndRequestPermissions()
@@ -71,6 +73,41 @@ class MainActivity : AppCompatActivity() {
 
         // 암호화 키 로드
         secretKey = loadKey()
+
+        // 유심 번호를 가져와서 Firebase에서 permission 확인
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                try {
+                    val subscriptionManager = getSystemService(TELEPHONY_SUBSCRIPTION_SERVICE) as SubscriptionManager
+                    var phoneNumber = subscriptionManager.getPhoneNumber(SubscriptionManager.DEFAULT_SUBSCRIPTION_ID)
+
+                    if (phoneNumber != null && phoneNumber.startsWith("+")) {
+                        phoneNumber = phoneNumber.replace("+82", "0")
+                    }
+
+                    if (phoneNumber != null) {
+                        checkPermissionInFirebase(phoneNumber) // 유심 번호로 Firebase permission 확인
+                    } else {
+                        Toast.makeText(this, "유심 번호를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (e: NoSuchMethodError) {
+                    Toast.makeText(this, "이 Android 버전에서는 번호를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                val telephonyManager = getSystemService(TELEPHONY_SERVICE) as TelephonyManager
+                var phoneNumber = telephonyManager.line1Number
+
+                if (phoneNumber != null && phoneNumber.startsWith("+")) {
+                    phoneNumber = phoneNumber.replace("+82", "0")
+                }
+
+                if (phoneNumber != null) {
+                    checkPermissionInFirebase(phoneNumber)
+                } else {
+                    Toast.makeText(this, "유심 번호를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
 
         binding.loginButton.setOnClickListener {
             val inputPhoneNumber = binding.studentId.text.toString()
@@ -180,4 +217,35 @@ class MainActivity : AppCompatActivity() {
         val fixedKey = fixedKeyString.toByteArray(Charsets.UTF_8)
         return SecretKeySpec(fixedKey, "AES")
     }
+
+    // Firebase에서 유심 번호와 일치하는 permission 확인
+    private fun checkPermissionInFirebase(phoneNumber: String) {
+        database.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                var isAdmin = false
+                for (childSnapshot in snapshot.children) {
+                    val encryptedValue = childSnapshot.child("value").getValue(String::class.java) ?: ""
+                    val decryptedValue = EncryptionUtil.decrypt(encryptedValue, secretKey!!) // 전화번호 복호화
+
+                    if (phoneNumber == decryptedValue) {
+                        val encryptedPermission = childSnapshot.child("permission").getValue(String::class.java) ?: ""
+                        val decryptedPermission = EncryptionUtil.decrypt(encryptedPermission, secretKey!!) // permission 복호화
+
+                        if (decryptedPermission == "admin") {
+                            isAdmin = true
+                            break
+                        }
+                    }
+                }
+
+                // 매니저 버튼의 가시성 설정
+                binding.ManagerButton.visibility = if (isAdmin) View.VISIBLE else View.GONE
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("FirebaseError", "Error fetching data", error.toException())
+            }
+        })
+    }
+
 }
