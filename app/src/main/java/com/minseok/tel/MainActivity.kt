@@ -1,5 +1,5 @@
 package com.minseok.tel
-
+import androidx.appcompat.app.AlertDialog
 import android.Manifest
 import android.content.Context
 import android.content.Intent
@@ -11,6 +11,9 @@ import android.telephony.TelephonyManager
 import android.util.Base64
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -146,7 +149,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this@MainActivity, AdminActivity::class.java)
                     startActivity(intent)
                 }else {
-                    Toast.makeText(this, "유심에 저장된 번호를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
+                    showAlertDialog("우리 회원이 아닙니다!")
                 }
             } catch (e: NoSuchMethodError) {
                 Toast.makeText(this, "이 Android 버전에서는 번호를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
@@ -168,6 +171,33 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    private fun showAlertDialog(message: String) {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.custom_dialog, null)
+
+        val titleText = dialogLayout.findViewById<TextView>(R.id.dialogTitle)
+        val messageText = dialogLayout.findViewById<TextView>(R.id.dialogMessage)
+        val okButton = dialogLayout.findViewById<Button>(R.id.dialogButton)
+
+        titleText.text = "알림"
+        messageText.text = message
+
+        builder.setView(dialogLayout)
+        val dialog = builder.create()
+
+        okButton.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+
+        // 다이얼로그 크기 조정
+        val displayMetrics = resources.displayMetrics
+        val width = (displayMetrics.widthPixels * 0.9).toInt()
+        dialog.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }//로그인 실패 !! 다이얼로그
+
 
     private fun checkPhoneNumberInFirebase(inputPhoneNumber: String, phoneNumber: String) {
         var Key: String? = null
