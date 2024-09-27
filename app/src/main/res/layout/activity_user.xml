@@ -5,62 +5,51 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="@drawable/layer_background">
-
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:foregroundGravity="center"
-        android:src="@drawable/sku"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SKU 스마트출결"
-        android:textColor="@color/white"
-        android:textSize="32dp"
-        android:gravity="center"
-        android:paddingTop="110dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+    android:background="@drawable/layer_background3">
 
     <GridLayout
         android:id="@+id/gridLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="135dp"
+        android:layout_marginBottom="37dp"
         android:alignmentMode="alignMargins"
         android:columnCount="2"
         android:columnOrderPreserved="false"
         android:rowCount="3"
         android:useDefaultMargins="true"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="266dp">
+        android:background="@drawable/grid_item_background">
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_columnWeight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
-            <ImageButton
-                android:id="@+id/check"
+            <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/check" />
+                android:background="@drawable/shape_for_circle_button">
+
+                <ImageButton
+                    android:id="@+id/checkImage"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/check"
+                    android:background="null"
+                    android:scaleType="centerInside" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="출석"
-                android:textColor="@android:color/white"
+                android:textColor="@color/sky"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -72,21 +61,27 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/attendance"
+            <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/attendance" />
+                android:background="@drawable/shape_for_circle_button">
+
+                <ImageButton
+                    android:id="@+id/attendance"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/attendance"
+                    android:background="null"
+                    android:scaleType="centerInside" />
+            </FrameLayout>
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="출석체크"
-                android:textColor="@android:color/white"
+                android:textColor="@color/sky"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -98,20 +93,27 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/message"
+            <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/message" />
+                android:background="@drawable/shape_for_circle_button">
+
+                <ImageButton
+                    android:id="@+id/message"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/message"
+                    android:background="null"
+                    android:scaleType="centerInside" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="쪽지"
-                android:textColor="@android:color/white"
+                android:textColor="@color/sky"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -123,24 +125,75 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/id"
+            <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/id" />
+                android:background="@drawable/shape_for_circle_button">
 
+                <ImageButton
+                    android:id="@+id/id"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/id"
+                    android:background="null"
+                    android:scaleType="centerInside" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="모바일신분증"
-                android:textColor="@android:color/white"
+                android:textColor="@color/sky"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
     </GridLayout>
+
+    <ImageButton
+        android:id="@+id/menu_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:layout_marginTop="15dp"
+        android:src="@android:drawable/ic_menu"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SKU 스마트출석"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="10dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/black" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="이제 출석관리도 스마트하게!"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="120dp"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/white" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:background="null"
+        android:padding="0dp"
+        android:text="설정"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
 </RelativeLayout>
