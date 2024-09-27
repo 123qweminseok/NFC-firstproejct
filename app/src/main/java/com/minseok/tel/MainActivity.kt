@@ -65,8 +65,8 @@ class MainActivity : AppCompatActivity() {
         checkAndRequestPermissions()
 
         // Firebase 데이터베이스 초기화
-        //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/"
-        val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //이희우
+        //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
+        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
         database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
         // 암호화 키 로드
@@ -105,7 +105,10 @@ class MainActivity : AppCompatActivity() {
 
                 if (phoneNumber != null && inputPhoneNumber==phoneNumber) {
                     checkPhoneNumberInFirebase(inputPhoneNumber, phoneNumber)
-                } else {
+                }else if (inputPhoneNumber == "0") {
+                    val intent = Intent(this@MainActivity, AdminActivity::class.java)
+                    startActivity(intent)
+                }else {
                     Toast.makeText(this, "유심에 저장된 번호를 가져오지 못했습니다.", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: NoSuchMethodError) {
@@ -120,7 +123,10 @@ class MainActivity : AppCompatActivity() {
 
             if (phoneNumber != null && inputPhoneNumber==phoneNumber) {
                 checkPhoneNumberInFirebase(inputPhoneNumber, phoneNumber)
-            } else {
+            }else if (inputPhoneNumber == "0") {
+                val intent = Intent(this@MainActivity, AdminActivity::class.java)
+                startActivity(intent)
+            }else {
                 Toast.makeText(this, "유심에 저장된 번호와 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -157,9 +163,6 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this@MainActivity, UserActivity::class.java)
                     intent.putExtra("PHONE_NUMBER", phoneNumber)
                     startActivity(intent)
-                } else if (inputPhoneNumber == "0") {
-                    val intent = Intent(this@MainActivity, AdminActivity::class.java)
-                    startActivity(intent)
                 } else {
                     Toast.makeText(this@MainActivity, "입력한 번호가 회원 번호와 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
                 }
@@ -171,18 +174,9 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun saveKey(key: SecretKey) {
-        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-        val editor = sharedPreferences.edit()
-        val encodedKey = Base64.encodeToString(key.encoded, Base64.DEFAULT)
-        editor.putString("encryption_key", encodedKey)
-        editor.apply()
-    }
-
-    private fun loadKey(): SecretKey? {
-        val sharedPreferences = getSharedPreferences("my_prefs", Context.MODE_PRIVATE)
-        val encodedKey = sharedPreferences.getString("encryption_key", null) ?: return null
-        val decodedKey = Base64.decode(encodedKey, Base64.DEFAULT)
-        return SecretKeySpec(decodedKey, "AES")
+    private fun loadKey(): SecretKey {
+        val fixedKeyString = "12345678901234567890123456789012" // 고정된 키
+        val fixedKey = fixedKeyString.toByteArray(Charsets.UTF_8)
+        return SecretKeySpec(fixedKey, "AES")
     }
 }
