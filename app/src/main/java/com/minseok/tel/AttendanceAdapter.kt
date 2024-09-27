@@ -20,7 +20,7 @@ class AttendanceAdapter(private val attendanceList: List<AttendanceItem>) : Recy
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val attendanceItem = attendanceList[position]
-        holder.nameTextView.text = attendanceItem.name
+        holder.nameTextView.text = "${attendanceItem.name}: ${attendanceItem.phoneNumber}"
         holder.timestampTextView.text = attendanceItem.timestamp
     }
 

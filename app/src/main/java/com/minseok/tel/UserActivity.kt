@@ -29,14 +29,9 @@
 
     class UserActivity : AppCompatActivity() {
 
-        private lateinit var nfcAdapter: NfcAdapter
-        private lateinit var pendingIntent: PendingIntent
-        private lateinit var intentFilters: Array<IntentFilter>
+        private lateinit var name: String
         private lateinit var phoneNumber: String
         private lateinit var nextmessage: ImageButton
-        private lateinit var mobileImage: ImageButton
-        private lateinit var database: DatabaseReference
-        private lateinit var secretKey: SecretKey
         private lateinit var attendcheck: ImageButton
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,11 +43,13 @@
 
             val getIntent = getIntent()
             phoneNumber = getIntent.getStringExtra("PHONE_NUMBER") ?: ""
+            name = getIntent.getStringExtra("Name") ?: ""
 
 
             attendcheck.setOnClickListener {
                 val intent = Intent(this, AttendanceCheck::class.java)
                 intent.putExtra("PHONE_NUMBER", phoneNumber)
+                intent.putExtra("Name", name)
                 startActivity(intent)
             }
 
@@ -76,6 +73,7 @@
             binding.attendance.setOnClickListener {
                 val intent = Intent(this, AttendanceActivity::class.java)
                 intent.putExtra("PHONE_NUMBER", phoneNumber)
+                intent.putExtra("Name", name)
                 startActivity(intent)
             }
 
