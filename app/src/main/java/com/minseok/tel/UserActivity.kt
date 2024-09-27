@@ -46,10 +46,13 @@
             nextmessage = findViewById(R.id.message)
             attendcheck = findViewById(R.id.check)
 
+            val getIntent = getIntent()
+            phoneNumber = getIntent.getStringExtra("PHONE_NUMBER") ?: ""
 
 
             attendcheck.setOnClickListener {
                 val intent = Intent(this, AttendanceCheck::class.java)
+                intent.putExtra("PHONE_NUMBER", phoneNumber)
                 startActivity(intent)
             }
 
