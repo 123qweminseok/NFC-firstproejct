@@ -36,14 +36,14 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="50dp"
-            android:layout_marginRight="50dp"
-            android:textColor="@color/black"
-            android:hint="전화번호"
-            android:textColorHint="@color/gray"
-            android:inputType="text"
             android:layout_marginTop="32dp"
+            android:layout_marginRight="50dp"
+            android:background="@drawable/rectangle_edittext_background"
+            android:hint="전화번호"
+            android:inputType="phone"
             android:padding="16dp"
-            android:background="@drawable/rectangle_edittext_background"/>
+            android:textColor="@color/black"
+            android:textColorHint="@color/gray" />
 
         <CheckBox
             android:id="@+id/save_credentials"
@@ -71,12 +71,14 @@
             android:textColor="@android:color/darker_gray"
             android:layout_gravity="center"/>
     </LinearLayout>
+
     <Button
         android:id="@+id/ManagerButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/sky"
         android:text="관리자모드"
-        android:backgroundTint="@color/sky" />
+        android:visibility="gone" />
 
 </LinearLayout>
     <!-- 1-->

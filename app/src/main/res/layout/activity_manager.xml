@@ -30,6 +30,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:padding="8dp">
 
+        <!-- 라디오 버튼 레이아웃 추가 -->
+        <RadioGroup
+            android:id="@+id/radioGroupPermission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="유저" />
+
+            <RadioButton
+                android:id="@+id/radioButtonAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="어드민"
+                android:layout_marginStart="16dp" />
+        </RadioGroup>
+
         <EditText
             android:id="@+id/editTextKey"
             android:layout_width="match_parent"
@@ -42,7 +64,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="전화번호 입력"
-            android:inputType="text" />
+            android:inputType="phone" />
 
         <Button
             android:id="@+id/buttonConfirm"
@@ -50,7 +72,6 @@
             android:layout_height="wrap_content"
             android:text="확인"
             android:backgroundTint="@color/sky"/>
-
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

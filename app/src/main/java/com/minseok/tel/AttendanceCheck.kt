@@ -36,10 +36,10 @@ class AttendanceCheck : AppCompatActivity() {
     private lateinit var pendingIntent: PendingIntent
     private lateinit var intentFilters: Array<IntentFilter>
     private lateinit var phoneNumber: String
+    private lateinit var name: String
     private lateinit var database: DatabaseReference
     private lateinit var secretKey: SecretKey
     private lateinit var gifImage1: ImageView
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,6 +67,7 @@ class AttendanceCheck : AppCompatActivity() {
         }
         val getIntent = getIntent()
         phoneNumber = getIntent.getStringExtra("PHONE_NUMBER") ?: ""
+        name = getIntent.getStringExtra("Name") ?: ""
 
         // Create an Intent to handle the NFC data
         val intent = Intent(this, javaClass)
@@ -124,7 +125,7 @@ class AttendanceCheck : AppCompatActivity() {
     private fun writePhoneNumberToTag(tag: Tag) {
         val ndef = Ndef.get(tag) ?: run {
             Toast.makeText(this, "NDEF is not supported on this tag.", Toast.LENGTH_SHORT).show()
-            saveAttendance(phoneNumber) // 전화번호 저장
+            saveAttendance(name, phoneNumber) // 전화번호 저장
             return
         }
         val message = NdefMessage(
@@ -152,7 +153,8 @@ class AttendanceCheck : AppCompatActivity() {
         }
     }
 
-    private fun saveAttendance(phoneNumber: String) {
+    private fun saveAttendance(name: String, phoneNumber: String) {
+        val encryptedName = EncryptionUtil.encrypt(name, secretKey)
         val encryptedPhoneNumber = EncryptionUtil.encrypt(phoneNumber, secretKey)
 
         val currentTime = System.currentTimeMillis()
@@ -161,6 +163,7 @@ class AttendanceCheck : AppCompatActivity() {
         val encryptedTimestmp = EncryptionUtil.encrypt(timestamp, secretKey)
 
         val attendanceData = mapOf(
+            "name" to encryptedName,
             "phoneNumber" to encryptedPhoneNumber,
             "timestamp" to encryptedTimestmp
         )

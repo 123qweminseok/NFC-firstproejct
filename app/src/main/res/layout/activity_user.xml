@@ -4,41 +4,57 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="@drawable/layer_background">
+    android:background="@drawable/layer_background3">
 
-    <ImageView
-        android:layout_width="180dp"
-        android:layout_height="100dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp"
-        android:foregroundGravity="center"
-        android:src="@drawable/sku"/>
-    <TextView
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <ImageButton
+        android:id="@+id/menu_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SKU 스마트출결"
-        android:textColor="@color/white"
-        android:textSize="32dp"
-        android:gravity="center"
-        android:paddingTop="110dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:src="@drawable/baseline_menu_24" />
+
+    <ImageButton
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/baseline_settings_24" />
+
+    <Button
+        android:id="@+id/qna_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/settings_button"
+        android:layout_alignParentTop="true"
+        android:text="QnA" />
 
     <GridLayout
         android:id="@+id/gridLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="395dp"
+        android:layout_height="342dp"
+        android:layout_below="@id/toolbar"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="135dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="25dp"
+        android:paddingTop="50dp"
         android:alignmentMode="alignMargins"
+        android:background="@drawable/grid_item_background"
         android:columnCount="2"
         android:columnOrderPreserved="false"
-        android:rowCount="3"
+        android:rowCount="2"
         android:useDefaultMargins="true"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="266dp">
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -47,20 +63,28 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/check"
+            <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/check" />
+                android:background="@drawable/shape_for_circle_button">
+
+                <ImageButton
+                    android:id="@+id/check"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/check"
+                    android:scaleType="centerInside"
+                    android:background="@color/sky"
+                    android:src="@drawable/check" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="출석"
-                android:textColor="@android:color/white"
+                android:textColor="@color/sky"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -72,21 +96,28 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/attendance"
+            <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/attendance" />
+                android:background="@drawable/shape_for_circle_button">
+
+                <ImageButton
+                    android:id="@+id/attendance"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/attendance"
+                    android:scaleType="centerInside"
+                    android:background="@color/sky"
+                    android:src="@drawable/attendance" />
+            </FrameLayout>
 
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="출석체크"
-                android:textColor="@android:color/white"
+                android:textColor="@color/sky"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -98,20 +129,28 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/message"
+            <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/message" />
+                android:background="@drawable/shape_for_circle_button">
+
+                <ImageButton
+                    android:id="@+id/message"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/message"
+                    android:scaleType="centerInside"
+                    android:background="@color/sky"
+                    android:src="@drawable/message" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="쪽지"
-                android:textColor="@android:color/white"
+                android:textColor="@color/sky"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
@@ -123,24 +162,32 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <ImageButton
-                android:id="@+id/id"
+            <FrameLayout
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:background="@null"
-                android:scaleType="centerCrop"
-                android:src="@drawable/id" />
+                android:background="@drawable/shape_for_circle_button">
 
+                <ImageButton
+                    android:id="@+id/id"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="@string/id"
+                    android:scaleType="centerInside"
+                    android:background="@color/sky"
+                    android:src="@drawable/id" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="모바일신분증"
-                android:textColor="@android:color/white"
+                android:textColor="@color/sky"
                 android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
     </GridLayout>
 </RelativeLayout>
+<!--고침-->

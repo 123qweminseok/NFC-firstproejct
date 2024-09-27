@@ -3,10 +3,10 @@ package com.minseok.tel
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +22,8 @@ class ManagerActivity : AppCompatActivity() {
     private lateinit var dataAdapter: DataAdapter
     private lateinit var database: DatabaseReference
 
+    private lateinit var radioButtonUser: RadioButton
+    private lateinit var radioButtonAdmin: RadioButton
     private lateinit var editTextKey: EditText
     private lateinit var editTextValue: EditText
     private lateinit var buttonConfirm: Button
@@ -37,6 +39,8 @@ class ManagerActivity : AppCompatActivity() {
         dataAdapter = DataAdapter(emptyList()) { item -> showDeleteConfirmationDialog(item) }
         recyclerView.adapter = dataAdapter
 
+        radioButtonUser = findViewById(R.id.radioButtonUser)
+        radioButtonAdmin = findViewById(R.id.radioButtonAdmin)
         editTextKey = findViewById(R.id.editTextKey)
         editTextValue = findViewById(R.id.editTextValue)
         buttonConfirm = findViewById(R.id.buttonConfirm)
@@ -50,10 +54,18 @@ class ManagerActivity : AppCompatActivity() {
         buttonConfirm.setOnClickListener {
             val key = editTextKey.text.toString()
             val value = editTextValue.text.toString()
-            saveDataToFirebase(key, value)
+            val permission = when {
+                radioButtonUser.isChecked -> "user"
+                radioButtonAdmin.isChecked -> "admin"
+                else -> ""
+            }
+            saveDataToFirebase(key, value, permission)
             editTextKey.text.clear()
             editTextValue.text.clear()
+            radioButtonUser.isChecked = false
+            radioButtonAdmin.isChecked = false
         }
+
 
         fetchData()
 
@@ -90,7 +102,7 @@ class ManagerActivity : AppCompatActivity() {
             })
     }
 
-    private fun saveDataToFirebase(key: String, value: String) {
+    private fun saveDataToFirebase(key: String, value: String, permission: String) {
         // 먼저 데이터베이스에서 중복된 값이 있는지 확인
         database.orderByChild("value").equalTo(EncryptionUtil.encrypt(value, secretKey))
             .addListenerForSingleValueEvent(object : ValueEventListener {
@@ -104,8 +116,13 @@ class ManagerActivity : AppCompatActivity() {
                         try {
                             val encryptedKey = EncryptionUtil.encrypt(key, secretKey)
                             val encryptedValue = EncryptionUtil.encrypt(value, secretKey)
+                            val encryptedpermission = EncryptionUtil.encrypt(permission, secretKey)
 
-                            val data = mapOf("key" to encryptedKey, "value" to encryptedValue)
+                            val data = mapOf(
+                                "key" to encryptedKey,
+                                "value" to encryptedValue,
+                                "permission" to encryptedpermission
+                            )
                             database.push().setValue(data)
                                 .addOnSuccessListener {
                                     Log.d("FirebaseData", "Data saved successfully")
@@ -135,11 +152,13 @@ class ManagerActivity : AppCompatActivity() {
                     if (childSnapshot.key != "attendance") {
                         val encryptedKey = childSnapshot.child("key").getValue(String::class.java) ?: ""
                         val encryptedValue = childSnapshot.child("value").getValue(String::class.java) ?: ""
+                        val encryptedpermission = childSnapshot.child("permission").getValue(String::class.java) ?: ""
 
                         try {
                             val key = EncryptionUtil.decrypt(encryptedKey, secretKey)
                             val value = EncryptionUtil.decrypt(encryptedValue, secretKey)
-                            items.add(DataItem(key, value))
+                            val permission = EncryptionUtil.decrypt(encryptedpermission, secretKey)
+                            items.add(DataItem(key, value, permission))
                             Log.d("FirebaseData", "Key: $key, Value: $value")
                         } catch (e: BadPaddingException) {
                             Log.e("EncryptionError", "Error decrypting data", e)

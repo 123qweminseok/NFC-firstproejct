@@ -50,13 +50,15 @@ class AttendanceActivity : AppCompatActivity() {
                     for (data in snapshot.children) {
                         try {
                             // 복호화된 데이터를 화면에 추가
-                            val encryptedName = data.child("phoneNumber").getValue(String::class.java) ?: ""
+                            val encryptedName = data.child("name").getValue(String::class.java) ?: ""
+                            val encryptedPhoneNumber = data.child("phoneNumber").getValue(String::class.java) ?: ""
                             val encryptedTimestamp = data.child("timestamp").getValue(String::class.java) ?: ""
 
                             val name = EncryptionUtil.decrypt(encryptedName, secretKey)
+                            val phoneNumber = EncryptionUtil.decrypt(encryptedPhoneNumber, secretKey)
                             val timestamp = EncryptionUtil.decrypt(encryptedTimestamp, secretKey)
 
-                            attendanceList.add(AttendanceItem(name, timestamp))
+                            attendanceList.add(0,AttendanceItem(name, phoneNumber, timestamp))
                         } catch (e: BadPaddingException) {
                             Log.e("EncryptionError", "Error decrypting data", e)
                         }

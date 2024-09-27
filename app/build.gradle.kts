@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.bsh.commands.dir
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
@@ -38,6 +40,8 @@ android {
 }
 
 dependencies {
+    implementation ("com.google.android.material:material:1.4.0")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
     implementation ("com.github.bumptech.glide:glide:4.12.0")
     implementation ("com.google.firebase:firebase-storage-ktx:20.0.1")
     implementation ("com.google.code.gson:gson:2.8.9")
@@ -55,5 +59,5 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation ("com.github.bumptech.glide:glide:4.12.0")
-
 }
+//11
