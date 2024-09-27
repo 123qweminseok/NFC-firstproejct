@@ -1,3 +1,7 @@
 <resources>
+    <string name="message"></string>
+    <string name="id"></string>
+    <string name="check"></string>
+    <string name="attendance"></string>
     <string name="app_name">tel</string>
 </resources>
