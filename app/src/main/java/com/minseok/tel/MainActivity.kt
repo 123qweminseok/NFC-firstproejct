@@ -162,6 +162,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this@MainActivity, "${Key}님 환영합니다.", Toast.LENGTH_SHORT).show()
                     val intent = Intent(this@MainActivity, UserActivity::class.java)
                     intent.putExtra("PHONE_NUMBER", phoneNumber)
+                    intent.putExtra("Name",Key)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this@MainActivity, "입력한 번호가 회원 번호와 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
