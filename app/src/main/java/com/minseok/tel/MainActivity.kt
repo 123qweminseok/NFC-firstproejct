@@ -117,7 +117,7 @@ class MainActivity : AppCompatActivity() {
             if (inputPhoneNumber.isNotBlank()) {
                 getPhoneNumberAndCompare(inputPhoneNumber)
             } else {
-                Toast.makeText(this, "번호를 입력해주세요", Toast.LENGTH_SHORT).show()
+                showAlertDialog("번호를 입력해주세요")
             }
         }
 
@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
                     val intent = Intent(this@MainActivity, AdminActivity::class.java)
                     startActivity(intent)
                 }else {
-                    showAlertDialog("우리 회원이 아닙니다!")
+                    showAlertDialog("유심에 저장된 번호와 일치하지 않습니다.")
                 }
             } catch (e: NoSuchMethodError) {
                 Toast.makeText(this, "이 Android 버전에서는 번호를 가져올 수 없습니다.", Toast.LENGTH_SHORT).show()
@@ -167,7 +167,7 @@ class MainActivity : AppCompatActivity() {
                 val intent = Intent(this@MainActivity, AdminActivity::class.java)
                 startActivity(intent)
             }else {
-                Toast.makeText(this, "유심에 저장된 번호와 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                showAlertDialog("유심에 저장된 번호와 일치하지 않습니다.")
             }
         }
     }
@@ -232,7 +232,7 @@ class MainActivity : AppCompatActivity() {
                     intent.putExtra("Name",Key)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(this@MainActivity, "입력한 번호가 회원 번호와 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
+                    showAlertDialog("입력한 번호가 회원 번호와 일치하지 않습니다.")
                 }
             }
 
