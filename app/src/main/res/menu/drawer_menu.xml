@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_check"
+            android:icon="@drawable/check"
+            android:title="출석" />
+        <item
+            android:id="@+id/nav_attendance"
+            android:icon="@drawable/attendance"
+            android:title="출석체크" />
+        <item
+            android:id="@+id/nav_message"
+            android:icon="@drawable/message"
+            android:title="쪽지" />
+        <item
+            android:id="@+id/nav_id"
+            android:icon="@drawable/id"
+            android:title="모바일신분증" />
+    </group>
+</menu>

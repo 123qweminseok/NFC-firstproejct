@@ -3,5 +3,8 @@
     <string name="id"></string>
     <string name="check"></string>
     <string name="attendance"></string>
-    <string name="app_name">tel</string>
+    <string name="app_name">SKU스마트출석</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
 </resources>
