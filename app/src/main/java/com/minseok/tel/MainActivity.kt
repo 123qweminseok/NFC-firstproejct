@@ -269,7 +269,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 // 매니저 버튼의 가시성 설정
-                binding.ManagerButton.visibility = if (isAdmin) View.VISIBLE else View.GONE
+                    binding.ManagerButton.visibility = if (isAdmin) View.VISIBLE else View.GONE
             }
 
             override fun onCancelled(error: DatabaseError) {

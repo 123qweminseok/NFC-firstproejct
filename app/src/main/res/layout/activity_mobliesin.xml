@@ -1,24 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/sky">
+    android:background="@drawable/gradient_background">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Back"
-            />
+            android:src="@drawable/ic_back" />
+
         <FrameLayout
             android:layout_width="120dp"
             android:layout_height="120dp"
@@ -30,10 +34,9 @@
                 android:id="@+id/userImageView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/circular_background"
                 android:scaleType="centerCrop"
-                android:src="@android:drawable/ic_menu_camera"
-                android:background="#424242"
-                android:padding="24dp" />
+                android:src="@drawable/baseline_person_24" />
 
             <View
                 android:layout_width="16dp"
@@ -42,36 +45,34 @@
         </FrameLayout>
 
         <Button
-            android:backgroundTint="@color/cardview_shadow_start_color"
             android:id="@+id/selectImageButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_button"
             android:text="이미지 선택"
             android:textColor="#FFFFFF"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp" />
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
             android:orientation="vertical"
-            android:background="#000000"
             android:padding="16dp">
 
             <TextView
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="프로필"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:layout_marginBottom="16dp" />
+                android:textSize="18sp" />
 
             <EditText
                 android:id="@+id/nameEditText"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -81,7 +82,6 @@
 
             <EditText
                 android:id="@+id/residentNumberEditText"
-
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
@@ -92,44 +92,44 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:text="생일 추가"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="16dp" />
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:id="@+id/addressEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="기타"
-                android:textColor="#AAAAAA"
-                android:layout_marginBottom="8dp" />
+                android:textColor="#AAAAAA" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="기타 방법으로 사용자가 나를 찾기"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="8dp" />
+                android:textColor="#FFFFFF" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
                 android:text="도움말 및 피드백"
-                android:textColor="#FFFFFF"
-                android:layout_marginBottom="8dp" />
+                android:textColor="#FFFFFF" />
 
         </LinearLayout>
 
         <Button
-            android:layout_gravity="center"
-            android:backgroundTint="@color/cardview_shadow_start_color"
+            android:backgroundTint="@color/black"
             android:id="@+id/saveButton"
-            android:text="저장하기"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </Button>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_button"
+            android:text="저장하기" />
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -75,6 +75,8 @@ class UserActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // 클릭 리스너 설정
         setupClickListeners()
+
+
     }
 
 
@@ -136,14 +138,17 @@ class UserActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     // 메시지 앱 열기 메서드
     private fun openMessageApp() {
-        val intent = Intent(Intent.ACTION_SENDTO).apply {
-            data = Uri.parse("smsto:")  // SMS 앱만 응답하도록 설정
-        }
-        try {
-            startActivity(intent)
-        } catch (e: ActivityNotFoundException) {
-            Toast.makeText(this, "SMS 앱을 찾을 수 없습니다.", Toast.LENGTH_SHORT).show()
-        }
+        val messageFragment = MessageFragment.newInstance("그냥넣음", "사실필요없긴")//MessageFragment 내부에서 사용될수 있는데 데이터 ㅇㅇ
+        supportFragmentManager.beginTransaction()
+            .setCustomAnimations(
+                R.anim.slide_in_right,
+                R.anim.slide_out_left,
+                R.anim.slide_in_left,
+                R.anim.slide_out_right
+            )
+            .add(R.id.fragment_container, messageFragment)
+            .addToBackStack(null)
+            .commit()
     }
 
     // 모바일 신분증 액티비티 시작 메서드
