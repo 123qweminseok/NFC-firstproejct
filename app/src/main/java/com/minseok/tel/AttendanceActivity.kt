@@ -29,8 +29,8 @@ class AttendanceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_attendance)
 
         phoneNumber = intent.getStringExtra("PHONE_NUMBER") ?: ""
-        //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
-        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
+        val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
+//        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
         database = FirebaseDatabase.getInstance(firebaseUrl).reference
         secretKey = loadKey()
 

@@ -47,8 +47,8 @@ class AttendanceCheck : AppCompatActivity() {
         var binding= ActivityAttendanceCheckBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
-        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
+        val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
+//        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
         database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
         // 암호화 키 로드
