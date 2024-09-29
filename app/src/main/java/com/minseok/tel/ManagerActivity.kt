@@ -62,7 +62,7 @@ class ManagerActivity : AppCompatActivity() {
             saveDataToFirebase(key, value, permission)
             editTextKey.text.clear()
             editTextValue.text.clear()
-            radioButtonUser.isChecked = false
+            radioButtonUser.isChecked = true
             radioButtonAdmin.isChecked = false
         }
 

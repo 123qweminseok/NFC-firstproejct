@@ -42,6 +42,7 @@
                 android:id="@+id/radioButtonUser"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:checked="true"
                 android:text="유저" />
 
             <RadioButton
