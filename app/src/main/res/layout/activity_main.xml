@@ -10,7 +10,7 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="성결대학교 창의인재 프로젝트"
+        android:text="@string/topname"
         android:textColor="@color/sky" />
 
     <LinearLayout
@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="로그인"
+            android:text="@string/login"
             android:textSize="24sp"
             android:textColor="@color/sky"
             android:layout_gravity="center"
@@ -39,7 +39,7 @@
             android:layout_marginTop="32dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/rectangle_edittext_background"
-            android:hint="전화번호"
+            android:hint="@string/phonnumber"
             android:inputType="phone"
             android:padding="16dp"
             android:textColor="@color/black"
@@ -49,7 +49,7 @@
             android:id="@+id/save_credentials"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="전화번호 저장"
+            android:text="@string/savephonnumber"
             android:textColor="@color/white"
             android:layout_marginTop="16dp"/>
         <Button
@@ -58,14 +58,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
             android:layout_marginRight="50dp"
-            android:text="로그인"
+            android:text="@string/login2"
             android:backgroundTint="@color/sky"
             android:layout_marginTop="24dp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="※ 전화번호 저장시 개인정보유출에 유의해 주세요!"
+            android:text="@string/notice"
             android:textSize="12sp"
             android:layout_marginTop="16dp"
             android:textColor="@android:color/darker_gray"
@@ -77,7 +77,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/sky"
-        android:text="관리자모드"
+        android:text="@string/admistrator"
         android:visibility="gone" />
 
 </LinearLayout>

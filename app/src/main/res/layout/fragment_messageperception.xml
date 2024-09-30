@@ -21,16 +21,23 @@
         <EditText
             android:id="@+id/messageEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="250dp"
             android:hint="메시지를 입력하세요"
             android:inputType="textMultiLine"
-            android:minLines="3" />
+            android:minLines="3"
+            android:background="@drawable/border"
+            android:padding="16dp"
+            android:layout_marginBottom="8dp"
+            android:scrollbars="vertical"/>
+
 
         <Button
             android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
+            android:background="@color/sky"
+            android:textColor="@color/white"
             android:text="보내기" />
     </LinearLayout>
 
