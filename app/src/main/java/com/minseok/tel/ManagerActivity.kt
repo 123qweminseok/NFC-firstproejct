@@ -149,7 +149,7 @@ class ManagerActivity : AppCompatActivity() {
                 val items = mutableListOf<DataItem>()
                 for (childSnapshot in snapshot.children) {
                     // 현재 노드가 "attendance"인지 확인
-                    if (childSnapshot.key != "attendance") {
+                    if (childSnapshot.key != "attendance" && childSnapshot.key != "messages") {
                         val encryptedKey = childSnapshot.child("key").getValue(String::class.java) ?: ""
                         val encryptedValue = childSnapshot.child("value").getValue(String::class.java) ?: ""
                         val encryptedpermission = childSnapshot.child("permission").getValue(String::class.java) ?: ""
