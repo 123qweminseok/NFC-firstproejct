@@ -47,7 +47,7 @@ class MessageAdapter(private val onDeleteClick: (Message) -> Unit) : RecyclerVie
             senderTextView.text = "보낸사람: ${message.sender}"
             phoneTextView.text = "번호: ${message.phone}"  // 전화번호만 표시
             messageTextView.text ="내용 ${message.message}"  // "메시지: " 접두어 제거
-            deleteButton.setOnClickListener { onDeleteClick(message) `}
+            deleteButton.setOnClickListener { onDeleteClick(message)}
         }
     }
 }
