@@ -28,44 +28,30 @@
             app:mcv_weekDayTextAppearance="@style/CustomTextAppearance.Small"
             app:mcv_dateTextAppearance="@style/CustomTextAppearance"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/selectedDatesText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="#333333"/>
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="선택된 날짜"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:background="@drawable/textview_background"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+        <EditText
+            android:id="@+id/nameInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="사용자 이름 입력"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"/>
 
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                />
-            <TextView
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="8dp"
-                android:id="@+id/selectedDatesText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:textColor="#333333"
-                android:text=""/>
-
-
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/textview_background"
+            android:text="출장 등록"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

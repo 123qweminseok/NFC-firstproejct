@@ -17,7 +17,10 @@ import androidx.drawerlayout.widget.DrawerLayout
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.minseok.tel.databinding.ActivityUserBinding
 
 // UserActivity 클래스: 사용자 메인 화면을 관리하는 액티비티
@@ -189,7 +192,7 @@ class UserActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     // 메시지 앱 열기 메서드
     private fun openMessageApp() {
-        val messageFragment = MessageFragment.newInstance("그냥넣음", "사실필요없긴")//MessageFragment 내부에서 사용될수 있는데 데이터 ㅇㅇ
+        val messageFragment = MessageFragment.newInstance(phoneNumber, name)
         supportFragmentManager.beginTransaction()
             .setCustomAnimations(
                 R.anim.slide_in_right,
@@ -201,7 +204,6 @@ class UserActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             .addToBackStack(null)
             .commit()
     }
-
     // 모바일 신분증 액티비티 시작 메서드
     private fun startMobileSinActivity() {
         val intent = Intent(this, MoblieSin::class.java)
@@ -218,4 +220,27 @@ class UserActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             super.onBackPressed()
         }
     }
-}
+    fun checkIfUserIsAdmin(callback: (Boolean) -> Unit) {
+        val database = FirebaseDatabase.getInstance()
+        val usersRef = database.getReference("users")
+
+        usersRef.orderByChild("encryptedPhoneNumber").equalTo(phoneNumber).addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    for (userSnapshot in dataSnapshot.children) {
+                        val permission = userSnapshot.child("permission").getValue(String::class.java)
+                        callback(permission == "admin")
+                        return
+                    }
+                }
+                callback(false)
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {
+                Log.e("MessageBusinessTrip", "Error checking admin status", databaseError.toException())
+                callback(false)
+            }
+        })
+    }
+    }
+

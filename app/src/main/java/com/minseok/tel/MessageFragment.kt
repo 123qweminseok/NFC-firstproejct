@@ -1,5 +1,6 @@
 package com.minseok.tel
 
+import MessageBusinessTrip
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,10 +52,14 @@ class MessageFragment : Fragment() {
             animateButton(it)
         }
         binding.btnBusinessTripManagement.setOnClickListener {
-            val businessTripFragment = MessageBusinessTrip()
+            val businessTripFragment = MessageBusinessTrip().apply {
+                arguments = Bundle().apply {
+                    putString("phoneNumber", phoneNumber)
+                }
+            }
             replaceFragment(businessTripFragment)
             animateButton(it)
-        }
+                }
     }
 
     // 버튼 클릭 시 애니메이션 적용
