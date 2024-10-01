@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.prolificinteractive.materialcalendarview.OnDateSelectedListener
+import com.prolificinteractive.materialcalendarview.OnRangeSelectedListener
 import com.prolificinteractive.materialcalendarview.DayViewDecorator
 import com.prolificinteractive.materialcalendarview.DayViewFacade
 import com.prolificinteractive.materialcalendarview.spans.DotSpan
@@ -25,8 +26,7 @@ import com.minseok.tel.EncryptionUtil
 import com.minseok.tel.R
 import javax.crypto.spec.SecretKeySpec
 
-
-class MessageBusinessTrip : Fragment(), OnDateSelectedListener {
+class MessageBusinessTrip : Fragment(), OnDateSelectedListener, OnRangeSelectedListener {
     private lateinit var calendarView: MaterialCalendarView
     private lateinit var selectedDatesText: TextView
     private lateinit var nameInput: EditText
@@ -36,7 +36,7 @@ class MessageBusinessTrip : Fragment(), OnDateSelectedListener {
     private lateinit var phoneNumber: String
     private lateinit var secretKey: SecretKeySpec
     private lateinit var database: DatabaseReference
-
+    private var selectedDates: MutableSet<CalendarDay> = mutableSetOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -65,17 +65,17 @@ class MessageBusinessTrip : Fragment(), OnDateSelectedListener {
         }
 
         calendarView.setOnDateChangedListener(this)
-        calendarView.selectionMode = MaterialCalendarView.SELECTION_MODE_SINGLE
+        calendarView.setOnRangeSelectedListener(this)
+        calendarView.selectionMode = MaterialCalendarView.SELECTION_MODE_MULTIPLE
 
         selectedDateDecorator = SelectedDateDecorator(requireContext())
         calendarView.addDecorator(selectedDateDecorator)
         calendarView.addDecorator(TodayDecorator())
 
         submitButton.setOnClickListener {
-            val selectedDate = calendarView.selectedDate
             val name = nameInput.text.toString()
-            if (selectedDate != null && name.isNotEmpty()) {
-                saveBusinessTripToFirebase(selectedDate, name)
+            if (selectedDates.isNotEmpty() && name.isNotEmpty()) {
+                saveBusinessTripToFirebase(selectedDates.toList(), name)
             } else {
                 Toast.makeText(context, "날짜와 이름을 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -113,7 +113,6 @@ class MessageBusinessTrip : Fragment(), OnDateSelectedListener {
         })
     }
 
-
     private fun setupAdminView() {
         nameInput.visibility = View.VISIBLE
         submitButton.visibility = View.VISIBLE
@@ -124,24 +123,46 @@ class MessageBusinessTrip : Fragment(), OnDateSelectedListener {
         submitButton.visibility = View.GONE
     }
 
-    private fun saveBusinessTripToFirebase(date: CalendarDay, name: String) {
-        val dateString = "${date.year}-${date.month}-${date.day}"
+    private fun saveBusinessTripToFirebase(dates: List<CalendarDay>, name: String) {
         val database = FirebaseDatabase.getInstance()
         val businessTripsRef = database.getReference("business_trips")
-        businessTripsRef.child(dateString).push().setValue(name)
+
+        dates.forEach { date ->
+            val dateString = "${date.year}-${date.month}-${date.day}"
+            businessTripsRef.child(dateString).push().setValue(name)
+                .addOnSuccessListener {
+                    Toast.makeText(context, "출장 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                    nameInput.text.clear()
+                    selectedDates.clear()
+                    calendarView.clearSelection()
+                    updateSelectedDatesText()
+                }
+                .addOnFailureListener { exception ->
+                    Toast.makeText(context, "저장에 실패했습니다: ${exception.message}", Toast.LENGTH_SHORT).show()
+                }
+        }
     }
 
     override fun onDateSelected(widget: MaterialCalendarView, date: CalendarDay, selected: Boolean) {
         if (selected) {
+            selectedDates.add(date)
             selectedDateDecorator.addDate(date)
-            if (isAdmin) {
-                selectedDatesText.text = "선택된 날짜: ${date.year}년 ${date.month}월 ${date.day}일"
-            } else {
-                loadBusinessTripsForDate(date)
-            }
         } else {
+            selectedDates.remove(date)
             selectedDateDecorator.removeDate(date)
         }
+        if (isAdmin) {
+            updateSelectedDatesText()
+        } else {
+            loadBusinessTripsForDate(date)
+        }
+        calendarView.invalidateDecorators()
+    }
+
+    override fun onRangeSelected(widget: MaterialCalendarView, dates: List<CalendarDay>) {
+        selectedDates.addAll(dates)
+        dates.forEach { selectedDateDecorator.addDate(it) }
+        updateSelectedDatesText()
         calendarView.invalidateDecorators()
     }
 
@@ -166,11 +187,9 @@ class MessageBusinessTrip : Fragment(), OnDateSelectedListener {
         })
     }
 
-
     private fun updateSelectedDatesText() {
-        val selectedDates = calendarView.selectedDates
         val dateStrings = selectedDates.map { "${it.year}년 ${it.month}월 ${it.day}일" }
-        selectedDatesText.text = "${dateStrings.joinToString(", ")}"
+        selectedDatesText.text = "선택된 날짜: ${dateStrings.joinToString(", ")}"
     }
 
     // 오늘 날짜를 강조 표시하는 Decorator
