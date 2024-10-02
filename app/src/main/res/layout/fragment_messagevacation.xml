@@ -16,10 +16,34 @@
         android:padding="16dp"
         tools:context=".Messageperception">
 
-
-        <CalendarView
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            app:mcv_selectionColor="#1A4CAF50"
+            app:mcv_showOtherDates="all"
+            app:mcv_calendarMode="month"
+            app:mcv_tileSize="50dp"
+            app:mcv_headerTextAppearance="@style/CustomTextAppearance"
+            app:mcv_weekDayTextAppearance="@style/CustomTextAppearance.Small"
+            app:mcv_dateTextAppearance="@style/CustomTextAppearance"/>
+
+        <TextView
+            android:id="@+id/selectedDatesText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textSize="16sp"
+            android:textColor="#333333"/>
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/textview_background"
+            android:text="휴가 등록"
+            android:visibility="gone" />
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>
