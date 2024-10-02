@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_above="@+id/gridLayout"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="100dp"
             android:text="스마트폰으로 간편하게 출석 체크하세요!"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
         <LinearLayout
             android:layout_width="match_parent"

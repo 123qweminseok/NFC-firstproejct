@@ -7,7 +7,8 @@
     android:layout_height="match_parent"
     android:layout_margin="16dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="5dp"
+    app:cardBackgroundColor="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="쪽지함"
+            android:layout_gravity="center"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="16dp"/>
@@ -32,7 +34,11 @@
             android:textSize="18sp"
             android:padding="16dp"
             android:layout_marginBottom="16dp"
-            app:cornerRadius="8dp"/>
+            app:cornerRadius="8dp"
+            android:background="@color/sky"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="@color/white"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btn_vacation_request"
@@ -42,7 +48,11 @@
             android:textSize="18sp"
             android:padding="16dp"
             android:layout_marginBottom="16dp"
-            app:cornerRadius="8dp"/>
+            app:cornerRadius="8dp"
+            android:background="@color/sky"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="@color/white"
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/btn_business_trip_management"
@@ -51,7 +61,11 @@
             android:text="출장 관리"
             android:textSize="18sp"
             android:padding="16dp"
-            app:cornerRadius="8dp"/>
+            app:cornerRadius="8dp"
+            android:background="@color/sky"
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="@color/white"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
