@@ -47,7 +47,12 @@ class MessageFragment : Fragment() {
             animateButton(it)
         }
         binding.btnVacationRequest.setOnClickListener {
-            val vacationRequestFragment = Messagevacation()
+            val vacationRequestFragment = Messagevacation().apply {
+                arguments = Bundle().apply {
+                    putString("phoneNumber", phoneNumber)
+                    putString("name",name)
+                }
+            }
             replaceFragment(vacationRequestFragment)
             animateButton(it)
         }

@@ -34,6 +34,7 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
     private lateinit var selectedDateDecorator: SelectedDateDecorator
     private var isAdmin: Boolean = false
     private lateinit var phoneNumber: String
+    private lateinit var name: String
     private lateinit var secretKey: SecretKeySpec
     private lateinit var database: DatabaseReference
     private var selectedDates: MutableSet<CalendarDay> = mutableSetOf()
@@ -52,8 +53,13 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
 
         // 전화번호와 키 로드
         phoneNumber = arguments?.getString("phoneNumber") ?: ""
+        name = arguments?.getString("name") ?: ""
+
         secretKey = loadKey()
-        database = FirebaseDatabase.getInstance().reference
+
+        //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
+        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
+        database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
         // 사용자 권한 확인
         checkUserPermission { isAdmin ->
@@ -80,8 +86,8 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
         // 버튼 클릭 리스너 설정
         submitButton.setOnClickListener {
             // 2. 이름을 입력받지 않고 선택된 날짜가 있을 때만 저장
-            if (selectedDates.isNotEmpty()) {
-                saveVacationToFirebase(selectedDates.toList())
+            if (selectedDates.isNotEmpty() && name.isNotEmpty()) {
+                saveVacationToFirebase(selectedDates.toList(), name)
             } else {
                 Toast.makeText(context, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -140,14 +146,13 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
     }
 
     // 휴가 정보를 Firebase에 저장
-    private fun saveVacationToFirebase(dates: List<CalendarDay>) {
-        val database = FirebaseDatabase.getInstance()
-        val vacationsRef = database.getReference("vacations")
+    private fun saveVacationToFirebase(dates: List<CalendarDay>, name: String) {
+        val vacationsRef = database.child("vacations")
 
         dates.forEach { date ->
             val dateString = "${date.year}-${date.month}-${date.day}"
             // 이름을 저장하지 않음 (제거됨)
-            vacationsRef.child(dateString).push().setValue("휴가")
+            vacationsRef.child(dateString).push().setValue(name)
                 .addOnSuccessListener {
                     Toast.makeText(context, "휴가 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
                     selectedDates.clear()
@@ -192,8 +197,7 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
     // 특정 날짜의 휴가 정보를 로드
     private fun loadVacationsForDate(date: CalendarDay) {
         val dateString = "${date.year}-${date.month}-${date.day}"
-        val database = FirebaseDatabase.getInstance()
-        val vacationsRef = database.getReference("vacations").child(dateString)
+        val vacationsRef = database.child("vacations").child(dateString)
 
         vacationsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -51,7 +51,10 @@ class MessageBusinessTrip : Fragment(), OnDateSelectedListener, OnRangeSelectedL
 
         phoneNumber = arguments?.getString("phoneNumber") ?: ""
         secretKey = loadKey()
-        database = FirebaseDatabase.getInstance().reference
+
+        //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
+        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
+        database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
         checkUserPermission { isAdmin ->
             this.isAdmin = isAdmin
@@ -124,8 +127,7 @@ class MessageBusinessTrip : Fragment(), OnDateSelectedListener, OnRangeSelectedL
     }
 
     private fun saveBusinessTripToFirebase(dates: List<CalendarDay>, name: String) {
-        val database = FirebaseDatabase.getInstance()
-        val businessTripsRef = database.getReference("business_trips")
+        val businessTripsRef = database.child("business_trips")
 
         dates.forEach { date ->
             val dateString = "${date.year}-${date.month}-${date.day}"
@@ -168,8 +170,7 @@ class MessageBusinessTrip : Fragment(), OnDateSelectedListener, OnRangeSelectedL
 
     private fun loadBusinessTripsForDate(date: CalendarDay) {
         val dateString = "${date.year}-${date.month}-${date.day}"
-        val database = FirebaseDatabase.getInstance()
-        val businessTripsRef = database.getReference("business_trips").child(dateString)
+        val businessTripsRef = database.child("business_trips").child(dateString)
 
         businessTripsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {

@@ -25,10 +25,10 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_above="@+id/gridLayout"
-            android:layout_marginBottom="80dp"
+            android:layout_marginBottom="100dp"
             android:text="스마트폰으로 간편하게 출석 체크하세요!"
             android:textColor="@color/white"
-            android:textSize="20sp"
+            android:textSize="30sp"
             android:textStyle="bold" />
         <LinearLayout
             android:layout_width="match_parent"
@@ -223,4 +223,11 @@
 
     </RelativeLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/drawer_menu" />
 </androidx.drawerlayout.widget.DrawerLayout>
