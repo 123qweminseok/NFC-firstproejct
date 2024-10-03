@@ -33,7 +33,6 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
     private lateinit var submitButton: Button
     private lateinit var selectedDateDecorator: SelectedDateDecorator
     private lateinit var blueDateDecorator: BlueDateDecorator
-    private var isAdmin: Boolean = false
     private lateinit var phoneNumber: String
     private lateinit var name: String
     private lateinit var secretKey: SecretKeySpec
@@ -62,17 +61,6 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
         val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
         database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
-        // 사용자 권한 확인
-        checkUserPermission { isAdmin ->
-            this.isAdmin = isAdmin
-            activity?.runOnUiThread {
-                if (isAdmin) {
-                    setupUserView()
-                } else {
-                    setupAdminView()
-                }
-            }
-        }
 
         // 캘린더뷰 설정
         calendarView.setOnDateChangedListener(this)
@@ -141,16 +129,6 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
             })
     }
 
-    // 관리자용 뷰 설정
-    private fun setupAdminView() {
-        submitButton.visibility = View.VISIBLE
-    }
-
-    // 사용자용 뷰 설정
-    private fun setupUserView() {
-        submitButton.visibility = View.GONE
-    }
-
     // 휴가 정보를 Firebase에 저장
     private fun saveVacationToFirebase(dates: List<CalendarDay>, name: String) {
         val vacationsRef = database.child("vacations")
@@ -175,7 +153,6 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
                                     Toast.makeText(context, "휴가 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
                                     selectedDates.clear()
                                     calendarView.clearSelection()
-                                    updateSelectedDatesText()
                                 }
                                 .addOnFailureListener { exception ->
                                     Toast.makeText(context, "저장에 실패했습니다: ${exception.message}", Toast.LENGTH_SHORT).show()
@@ -188,7 +165,6 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
                                 Toast.makeText(context, "휴가 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
                                 selectedDates.clear()
                                 calendarView.clearSelection()
-                                updateSelectedDatesText()
                             }
                             .addOnFailureListener { exception ->
                                 Toast.makeText(context, "저장에 실패했습니다: ${exception.message}", Toast.LENGTH_SHORT).show()
@@ -218,11 +194,8 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
             selectedDates.remove(date)
             selectedDateDecorator.removeDate(date)
         }
-        if (isAdmin) {
-            updateSelectedDatesText()
-        } else {
-            loadVacationsForDate(date)
-        }
+
+        loadVacationsForDate(date)
         calendarView.invalidateDecorators()
     }
 
@@ -230,7 +203,6 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
     override fun onRangeSelected(widget: MaterialCalendarView, dates: List<CalendarDay>) {
         selectedDates.addAll(dates)
         dates.forEach { selectedDateDecorator.addDate(it) }
-        updateSelectedDatesText()
         calendarView.invalidateDecorators()
     }
 
@@ -256,12 +228,6 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
                 selectedDatesText.visibility = View.GONE // 텍스트를 숨김
             }
         })
-    }
-
-    // 선택된 날짜 텍스트 업데이트
-    private fun updateSelectedDatesText() {
-        val dateStrings = selectedDates.map { "${it.year}년 ${it.month}월 ${it.day}일" }
-        selectedDatesText.text = "선택된 날짜: ${dateStrings.joinToString(", ")}"
     }
 
     // 오늘 날짜를 강조 표시하는 데코레이터
