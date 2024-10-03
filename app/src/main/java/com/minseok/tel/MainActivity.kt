@@ -3,6 +3,7 @@ import androidx.appcompat.app.AlertDialog
 import android.Manifest
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -35,6 +37,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var database: DatabaseReference
     private var secretKey: SecretKey? = null
     private lateinit var binding: ActivityMainBinding
+    private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var save_credentials: CheckBox
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     private fun checkAndRequestPermissions() {
@@ -66,6 +70,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        // SharedPreferences 초기화
+        sharedPreferences = getSharedPreferences("MyPrefs", Context.MODE_PRIVATE)
+
+        // 체크박스 연결
+        save_credentials = binding.saveCredentials
+
+        // 저장된 전화번호 불러오기
+        val savedPhoneNumber = sharedPreferences.getString("SAVED_PHONE_NUMBER", "")
+        binding.studentId.setText(savedPhoneNumber)
+
+        // 체크박스 상태 설정
+        val isChecked = sharedPreferences.getBoolean("CHECKBOX_STATE", false)
+        save_credentials.isChecked = isChecked
+
+        // 체크박스 클릭 리스너
+        save_credentials.setOnCheckedChangeListener { _, isChecked ->
+            val editor = sharedPreferences.edit()
+            editor.putBoolean("CHECKBOX_STATE", isChecked)
+
+            // 체크가 되어 있을 경우에만 전화번호를 저장하고, 체크가 해제될 경우 전화번호를 초기화
+            if (isChecked) {
+                editor.putString("SAVED_PHONE_NUMBER", binding.studentId.text.toString())
+            } else {
+                editor.remove("SAVED_PHONE_NUMBER") // 전화번호 초기화
+            }
+
+            editor.apply()
+        }
 
         checkAndRequestPermissions()
 
@@ -115,6 +148,12 @@ class MainActivity : AppCompatActivity() {
         binding.loginButton.setOnClickListener {
             val inputPhoneNumber = binding.studentId.text.toString()
             if (inputPhoneNumber.isNotBlank()) {
+                // 전화번호 저장
+                if (save_credentials.isChecked) {
+                    val editor = sharedPreferences.edit()
+                    editor.putString("SAVED_PHONE_NUMBER", inputPhoneNumber)
+                    editor.apply()
+                }
                 getPhoneNumberAndCompare(inputPhoneNumber)
             } else {
                 showAlertDialog("번호를 입력해주세요")

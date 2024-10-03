@@ -15,6 +15,7 @@ class DataAdapter(
 ) : RecyclerView.Adapter<DataAdapter.DataViewHolder>() {
 
     class DataViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val permission: TextView = view.findViewById(R.id.PermissiontextView)
         val textView: TextView = view.findViewById(R.id.itemTextView)
         val deleteIcon: ImageView = view.findViewById(R.id.deleteIcon)
     }
@@ -27,6 +28,9 @@ class DataAdapter(
     override fun onBindViewHolder(holder: DataViewHolder, position: Int) {
         val item = items[position]
         holder.textView.text = "${item.id}: ${item.value}"
+
+        // permission 값에 따라 텍스트 설정
+        holder.permission.text = if (item.permission == "admin") "어드민" else "유저"
 
         holder.deleteIcon.setOnClickListener {
             onDeleteClickListener(item)
