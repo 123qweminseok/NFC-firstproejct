@@ -32,8 +32,9 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
     private lateinit var selectedDatesText: TextView
     private lateinit var submitButton: Button
     private lateinit var selectedDateDecorator: SelectedDateDecorator
-    private var isAdmin: Boolean = false
+    private lateinit var blueDateDecorator: BlueDateDecorator
     private lateinit var phoneNumber: String
+    private lateinit var name: String
     private lateinit var secretKey: SecretKeySpec
     private lateinit var database: DatabaseReference
     private var selectedDates: MutableSet<CalendarDay> = mutableSetOf()
@@ -52,20 +53,14 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
 
         // 전화번호와 키 로드
         phoneNumber = arguments?.getString("phoneNumber") ?: ""
-        secretKey = loadKey()
-        database = FirebaseDatabase.getInstance().reference
+        name = arguments?.getString("name") ?: ""
 
-        // 사용자 권한 확인
-        checkUserPermission { isAdmin ->
-            this.isAdmin = isAdmin
-            activity?.runOnUiThread {
-                if (isAdmin) {
-                    setupUserView()
-                } else {
-                    setupAdminView()
-                }
-            }
-        }
+        secretKey = loadKey()
+
+        //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
+        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
+        database = FirebaseDatabase.getInstance(firebaseUrl).reference
+
 
         // 캘린더뷰 설정
         calendarView.setOnDateChangedListener(this)
@@ -76,12 +71,17 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
         selectedDateDecorator = SelectedDateDecorator(requireContext())
         calendarView.addDecorator(selectedDateDecorator)
         calendarView.addDecorator(TodayDecorator())
+        blueDateDecorator = BlueDateDecorator(requireContext())
+        calendarView.addDecorator(blueDateDecorator)
+
+        // 데이터 로드하여 파란색 데코레이터에 추가
+        loadAllVacations()
 
         // 버튼 클릭 리스너 설정
         submitButton.setOnClickListener {
             // 2. 이름을 입력받지 않고 선택된 날짜가 있을 때만 저장
-            if (selectedDates.isNotEmpty()) {
-                saveVacationToFirebase(selectedDates.toList())
+            if (selectedDates.isNotEmpty() && name.isNotEmpty()) {
+                saveVacationToFirebase(selectedDates.toList(), name)
             } else {
                 Toast.makeText(context, "날짜를 선택해주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -129,36 +129,57 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
             })
     }
 
-    // 관리자용 뷰 설정
-    private fun setupAdminView() {
-        submitButton.visibility = View.VISIBLE
-    }
-
-    // 사용자용 뷰 설정
-    private fun setupUserView() {
-        submitButton.visibility = View.GONE
-    }
-
     // 휴가 정보를 Firebase에 저장
-    private fun saveVacationToFirebase(dates: List<CalendarDay>) {
-        val database = FirebaseDatabase.getInstance()
-        val vacationsRef = database.getReference("vacations")
+    private fun saveVacationToFirebase(dates: List<CalendarDay>, name: String) {
+        val vacationsRef = database.child("vacations")
 
+        // 선택된 날짜를 순회하며 중복 체크 후 저장
         dates.forEach { date ->
             val dateString = "${date.year}-${date.month}-${date.day}"
-            // 이름을 저장하지 않음 (제거됨)
-            vacationsRef.child(dateString).push().setValue("휴가")
-                .addOnSuccessListener {
-                    Toast.makeText(context, "휴가 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
-                    selectedDates.clear()
-                    calendarView.clearSelection()
-                    updateSelectedDatesText()
+
+            // 이미 해당 날짜에 휴가 신청이 있는지 확인
+            vacationsRef.child(dateString).addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    if (snapshot.exists()) {
+                        // 이미 휴가를 신청한 날짜인 경우, 이름도 확인
+                        val existingNames = snapshot.children.mapNotNull { it.getValue(String::class.java) }
+                        if (existingNames.contains(name)) {
+                            // 이미 같은 이름으로 휴가를 신청한 경우
+                            Toast.makeText(context, "이미 휴가를 신청한 날짜입니다: $dateString", Toast.LENGTH_SHORT).show()
+                        } else {
+                            // 해당 날짜에 다른 이름으로 신청된 경우, 데이터를 저장
+                            vacationsRef.child(dateString).push().setValue(name)
+                                .addOnSuccessListener {
+                                    Toast.makeText(context, "휴가 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                                    selectedDates.clear()
+                                    calendarView.clearSelection()
+                                }
+                                .addOnFailureListener { exception ->
+                                    Toast.makeText(context, "저장에 실패했습니다: ${exception.message}", Toast.LENGTH_SHORT).show()
+                                }
+                        }
+                    } else {
+                        // 해당 날짜에 휴가 신청이 없는 경우, 데이터를 저장
+                        vacationsRef.child(dateString).push().setValue(name)
+                            .addOnSuccessListener {
+                                Toast.makeText(context, "휴가 정보가 저장되었습니다.", Toast.LENGTH_SHORT).show()
+                                selectedDates.clear()
+                                calendarView.clearSelection()
+                            }
+                            .addOnFailureListener { exception ->
+                                Toast.makeText(context, "저장에 실패했습니다: ${exception.message}", Toast.LENGTH_SHORT).show()
+                            }
+                    }
                 }
-                .addOnFailureListener { exception ->
-                    Toast.makeText(context, "저장에 실패했습니다: ${exception.message}", Toast.LENGTH_SHORT).show()
+
+                override fun onCancelled(error: DatabaseError) {
+                    Toast.makeText(context, "데이터베이스 오류: ${error.message}", Toast.LENGTH_SHORT).show()
                 }
+            })
         }
     }
+
+
 
     // 날짜 선택 시 호출되는 메소드
     override fun onDateSelected(
@@ -173,11 +194,8 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
             selectedDates.remove(date)
             selectedDateDecorator.removeDate(date)
         }
-        if (isAdmin) {
-            updateSelectedDatesText()
-        } else {
-            loadVacationsForDate(date)
-        }
+
+        loadVacationsForDate(date)
         calendarView.invalidateDecorators()
     }
 
@@ -185,36 +203,31 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
     override fun onRangeSelected(widget: MaterialCalendarView, dates: List<CalendarDay>) {
         selectedDates.addAll(dates)
         dates.forEach { selectedDateDecorator.addDate(it) }
-        updateSelectedDatesText()
         calendarView.invalidateDecorators()
     }
 
     // 특정 날짜의 휴가 정보를 로드
     private fun loadVacationsForDate(date: CalendarDay) {
         val dateString = "${date.year}-${date.month}-${date.day}"
-        val database = FirebaseDatabase.getInstance()
-        val vacationsRef = database.getReference("vacations").child(dateString)
+        val vacationsRef = database.child("vacations").child(dateString)
 
         vacationsRef.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val names = snapshot.children.mapNotNull { it.getValue(String::class.java) }
                 if (names.isNotEmpty()) {
                     selectedDatesText.text = "휴가자: ${names.joinToString(", ")}"
+                    selectedDatesText.visibility = View.VISIBLE // 텍스트를 보이게 함
                 } else {
                     selectedDatesText.text = "해당 날짜에 휴가자가 없습니다."
                 }
+                calendarView.invalidateDecorators() // 데코레이터 업데이트
             }
 
             override fun onCancelled(error: DatabaseError) {
                 selectedDatesText.text = "데이터 로딩 중 오류가 발생했습니다."
+                selectedDatesText.visibility = View.GONE // 텍스트를 숨김
             }
         })
-    }
-
-    // 선택된 날짜 텍스트 업데이트
-    private fun updateSelectedDatesText() {
-        val dateStrings = selectedDates.map { "${it.year}년 ${it.month}월 ${it.day}일" }
-        selectedDatesText.text = "선택된 날짜: ${dateStrings.joinToString(", ")}"
     }
 
     // 오늘 날짜를 강조 표시하는 데코레이터
@@ -258,4 +271,56 @@ class Messagevacation : Fragment(), OnDateSelectedListener, OnRangeSelectedListe
                 ?.let { view.setBackgroundDrawable(it) }
         }
     }
+
+    // 파란색 날짜 데코레이터 추가
+    inner class BlueDateDecorator(context: android.content.Context) : DayViewDecorator {
+        private val dates = HashSet<CalendarDay>()
+        private val color = ContextCompat.getColor(context, R.color.colorPrimaryDark) // 원하는 파란색
+
+        fun addDate(day: CalendarDay) {
+            dates.add(day)
+        }
+
+        fun removeDate(day: CalendarDay) {
+            dates.remove(day)
+        }
+
+        override fun shouldDecorate(day: CalendarDay): Boolean {
+            return dates.contains(day)
+        }
+
+        override fun decorate(view: DayViewFacade) {
+            view.addSpan(DotSpan(8f, color))
+        }
+    }
+
+    // 모든 날짜의 휴가 정보를 Firebase에서 불러와서 파란색으로 표시
+    private fun loadAllVacations() {
+        val vacationsRef = database.child("vacations")
+
+        vacationsRef.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (dateSnapshot in snapshot.children) {
+                    val dateString = dateSnapshot.key
+                    if (dateString != null) {
+                        // 문자열을 연도로 변환
+                        val parts = dateString.split("-")
+                        if (parts.size == 3) {
+                            val year = parts[0].toInt()
+                            val month = parts[1].toInt()
+                            val day = parts[2].toInt()
+                            val date = CalendarDay.from(year, month, day)
+                            blueDateDecorator.addDate(date) // 데이터가 있는 날짜를 파란색으로 추가
+                        }
+                    }
+                }
+                calendarView.invalidateDecorators() // 데코레이터 업데이트
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e("Messagevacation", "Error loading vacations", error.toException())
+            }
+        })
+    }
+
 }

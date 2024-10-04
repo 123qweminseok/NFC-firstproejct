@@ -45,8 +45,8 @@ class ManagerActivity : AppCompatActivity() {
         editTextValue = findViewById(R.id.editTextValue)
         buttonConfirm = findViewById(R.id.buttonConfirm)
 
-        val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
-//        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
+        //val firebaseUrl = "https://haha-f3b7a-default-rtdb.firebaseio.com/" //김민석
+        val firebaseUrl = "https://nfckt-b7c41-default-rtdb.firebaseio.com/" //이희우
         database = FirebaseDatabase.getInstance(firebaseUrl).reference
 
         secretKey = loadKey()
@@ -149,7 +149,8 @@ class ManagerActivity : AppCompatActivity() {
                 val items = mutableListOf<DataItem>()
                 for (childSnapshot in snapshot.children) {
                     // 현재 노드가 "attendance"인지 확인
-                    if (childSnapshot.key != "attendance" && childSnapshot.key != "messages" && childSnapshot.key !="users") {
+                    if (childSnapshot.key != "attendance" && childSnapshot.key != "messages" && childSnapshot.key !="users"
+                        && childSnapshot.key != "business_trips" && childSnapshot.key != "vacations") {
                         val encryptedKey = childSnapshot.child("key").getValue(String::class.java) ?: ""
                         val encryptedValue = childSnapshot.child("value").getValue(String::class.java) ?: ""
                         val encryptedpermission = childSnapshot.child("permission").getValue(String::class.java) ?: ""
