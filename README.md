@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/d888dda6-b728-41c9-ae53-b33d5609eb47)
+![image](https://github.com/user-attachments/assets/6a992469-b2ce-4a51-bf53-56601cfa474b)
 
 ## 주요 설명
 - **NFC기능을 활용한 출입관리 앱**: 현재 출결,출석 어플들은 다른 핸드폰으로 아이디, 비밀번호만 알면 로그인이 가능하다. 이런 보안적으로 문제가 있는것을 보완해 출석 및 출입관리 앱을 만들자.
