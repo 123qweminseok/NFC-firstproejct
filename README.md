@@ -62,5 +62,8 @@ NFC 기술: Android NFC API
 <img src="https://github.com/user-attachments/assets/d2bc94ce-e788-4a0d-a66d-bb6d656be73a" alt="쪽지, 지각 이의신청, 휴가신청" width="300">
 
 <h3>출장관리, 모바일 신분증 화면</h3>
-<img src="https://github.com/user-attachments/assets/your_image_id_here" alt="출장관리, 모바일 신분증 화면" width="300">
+<img src="https://github.com/user-attachments/assets/bd3fc455-ee37-4c27-a2c5-1d6b2dabf972" alt="출장관리, 모바일 신분증 화면" width="300">
+
+<h3>다국어 지원 기능</h3>
+<img src="https://github.com/user-attachments/assets/1b5fc1d1-939a-468e-96e4-7f54c622009a" alt="출장관리, 모바일 신분증 화면" width="300">
 
