@@ -49,11 +49,10 @@ NFC 기술: Android NFC API
 ## 화면 구성
 
 
-<h3>메인 화면</h3>
-![Uploading image.png…]()
-" alt="메인 화면" width="300">
+<h3>로그인 화면 </h3>
 
-<img src="![image](https://github.com/user-attachments/assets/f851bc01-7fd8-45ae-8953-79275206633b)
+<img src="![image](![image](https://github.com/user-attachments/assets/4e8dfa23-1138-4fe5-a42d-50dc79430b39)
+)
 " alt="로그인 화면" width="300">
 
 <h3>메인 화면 및 출석 화면</h3>
