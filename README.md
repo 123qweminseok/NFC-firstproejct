@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/e9e7d8b4-82c2-433c-91fe-763e146d06cc)
+![image](https://github.com/user-attachments/assets/d888dda6-b728-41c9-ae53-b33d5609eb47)![image](https://github.com/user-attachments/assets/e9e7d8b4-82c2-433c-91fe-763e146d06cc)
 ㅁ
 ## 주요 설명
 - **NFC기능을 활용한 출입관리 앱**: 현재 출결,출석 어플들은 다른 핸드폰으로 아이디, 비밀번호만 알면 로그인이 가능하다. 이런 보안적으로 문제가 있는것을 보완해 출석 및 출입관리 앱을 만들자.
@@ -50,7 +50,8 @@ NFC 기술: Android NFC API
 
 
 <h3>메인 화면</h3>
-<img src="![image](https://github.com/user-attachments/assets/a50f5857-1315-4ffa-80d6-dca4e84752d1)
+<img src="![image](![image](https://github.com/user-attachments/assets/f926e622-45ab-4c32-be87-14bde628510a)
+)
 " alt="메인 화면" width="300">
 
 <img src="![image](https://github.com/user-attachments/assets/f851bc01-7fd8-45ae-8953-79275206633b)
