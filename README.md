@@ -39,6 +39,7 @@ NFC 기술: Android NFC API
 
 ---
 
+![image](https://github.com/user-attachments/assets/38a374ba-1bf8-4f57-b8c5-c75fc20dedee)
 
 ## 개발자 소개
 - **개발자**: 김민석,이희우
@@ -50,8 +51,7 @@ NFC 기술: Android NFC API
 
 
 <h3>메인 화면</h3>
-<img src="![image](![image](https://github.com/user-attachments/assets/f926e622-45ab-4c32-be87-14bde628510a)
-)
+![Uploading image.png…]()
 " alt="메인 화면" width="300">
 
 <img src="![image](https://github.com/user-attachments/assets/f851bc01-7fd8-45ae-8953-79275206633b)
