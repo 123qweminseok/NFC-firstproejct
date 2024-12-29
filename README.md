@@ -49,32 +49,19 @@ NFC 기술: Android NFC API
 ## 화면 구성
 
 
-<h3>로그인 화면 </h3>
-
-<img src="![image](![image](https://github.com/user-attachments/assets/4e8dfa23-1138-4fe5-a42d-50dc79430b39)
-)
+<h3>로그인 화면</h3>
+<img src="(https://github.com/user-attachments/assets/7a3f832d-feb6-4b1f-b53f-27940a5d4bed)
 " alt="로그인 화면" width="300">
 
 <h3>메인 화면 및 출석 화면</h3>
-<img src="![image](https://github.com/user-attachments/assets/be448288-6ee2-4d3e-8ff3-76d315a24198)
-" alt="메인 화면 및 출석 화면" width="300">
+<img src="https://github.com/user-attachments/assets/be448288-6ee2-4d3e-8ff3-76d315a24198" alt="메인 화면 및 출석 화면" width="300">
 
 <h3>리더기 모드</h3>
-<img src="![image](https://github.com/user-attachments/assets/e5af7725-ed3c-4df8-8aa2-6b112d8e2eb8)
-" alt="리더기 모드" width="300">
+<img src="https://github.com/user-attachments/assets/e5af7725-ed3c-4df8-8aa2-6b112d8e2eb8" alt="리더기 모드" width="300">
 
-<h3>쪽지,지각 이의신청, 휴가신청 </h3>
-<img src="![image](https://github.com/user-attachments/assets/d2bc94ce-e788-4a0d-a66d-bb6d656be73a)
-" alt="쪽지,지각 이의신청, 휴가신청" width="300">
+<h3>쪽지, 지각 이의신청, 휴가신청</h3>
+<img src="https://github.com/user-attachments/assets/d2bc94ce-e788-4a0d-a66d-bb6d656be73a" alt="쪽지, 지각 이의신청, 휴가신청" width="300">
 
 <h3>출장관리, 모바일 신분증 화면</h3>
-<img src="![image](https://github.com/user-attachments/assets/4fc870bd-5828-456a-b3dc-e463081d9b63)
-" alt="출장관리, 모바일 신분증 화면" width="300">
-
-<h3>유저 모드(학생,사원)</h3>
-<img src="![image](https://github.com/user-attachments/assets/de109a3d-be54-46bc-8995-87a323cf1151)
-" alt="유저 모드(학생,사원)" width="300">
-
-<h3>다국어 지원 기능</h3>
-<img src="https://github.com/username/repository-name/images/login-screen.png" alt="다국어 지원 기능" width="300">
+<img src="https://github.com/user-attachments/assets/your_image_id_here" alt="출장관리, 모바일 신분증 화면" width="300">
 
