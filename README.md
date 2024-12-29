@@ -24,6 +24,8 @@ NFC 기술: Android NFC API
       2차로 관리자가 등록해둔 사용자의 핸드폰 번호와 자신이 입력한 번호와 비교해, 등록되어있다면 다음 화면으로 넘어가 출석을 할 수 있게 구성을 했다.<br>
       즉 타인의 핸드폰에서 절대 로그인 할 수 없는 기능이다. 본인의 핸드폰에서만 로그인이 가능하다.<br>
        이 기능은 현재 존재하지 않는 기능으로 완벽하게 대리출석을 방지할 수 있다.
+ - **리더기 모드**  
+  핸드폰 자체를 NFC태그를 읽는 리더기 모드로 구성(0번 누르면 작동)
 - **사용자 관리 시스템**  
   관리자(교수,인사담당자 등)/일반 유저(학생,회사원)으로 구분된 회원가입을 제공해 앱 내에서 사용자 정보를 등록, 삭제, 수정 가능.
 - **출입 내역 조회**  
@@ -42,3 +44,38 @@ NFC 기술: Android NFC API
 - **개발자**: 김민석,이희우
 - **사용 언어**:Kotlin
 - **출시 플랫폼**: Android (구글 플레이스토어)
+
+---
+## 화면 구성
+
+
+<h3>메인 화면</h3>
+<img src="![image](https://github.com/user-attachments/assets/a50f5857-1315-4ffa-80d6-dca4e84752d1)
+" alt="메인 화면" width="300">
+
+<img src="![image](https://github.com/user-attachments/assets/f851bc01-7fd8-45ae-8953-79275206633b)
+" alt="로그인 화면" width="300">
+
+<h3>메인 화면 및 출석 화면</h3>
+<img src="![image](https://github.com/user-attachments/assets/be448288-6ee2-4d3e-8ff3-76d315a24198)
+" alt="메인 화면 및 출석 화면" width="300">
+
+<h3>리더기 모드</h3>
+<img src="![image](https://github.com/user-attachments/assets/e5af7725-ed3c-4df8-8aa2-6b112d8e2eb8)
+" alt="리더기 모드" width="300">
+
+<h3>쪽지,지각 이의신청, 휴가신청 </h3>
+<img src="![image](https://github.com/user-attachments/assets/d2bc94ce-e788-4a0d-a66d-bb6d656be73a)
+" alt="쪽지,지각 이의신청, 휴가신청" width="300">
+
+<h3>출장관리, 모바일 신분증 화면</h3>
+<img src="![image](https://github.com/user-attachments/assets/4fc870bd-5828-456a-b3dc-e463081d9b63)
+" alt="출장관리, 모바일 신분증 화면" width="300">
+
+<h3>유저 모드(학생,사원)</h3>
+<img src="![image](https://github.com/user-attachments/assets/de109a3d-be54-46bc-8995-87a323cf1151)
+" alt="유저 모드(학생,사원)" width="300">
+
+<h3>다국어 지원 기능</h3>
+<img src="https://github.com/username/repository-name/images/login-screen.png" alt="다국어 지원 기능" width="300">
+
