@@ -9,12 +9,12 @@
 - **작업 기간**: 2024.9-11월
 
 ---
-## 기술 스택## 
+## 기술 스택
 프로그래밍 언어: Kotlin (Android Studio)
 데이터베이스: Firebase Realtime Database,Firebase Storge
 NFC 기술: Android NFC API
 
-## 주요 기능##
+## 주요 기능
 - **NFC 인증 기반 출입관리**  
     NFC 태그를 스캔하여 출입 확인
   - **유심 기반 로그인 기능**
