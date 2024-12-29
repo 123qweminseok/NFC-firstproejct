@@ -39,7 +39,6 @@ NFC 기술: Android NFC API
 
 ---
 
-![image](https://github.com/user-attachments/assets/38a374ba-1bf8-4f57-b8c5-c75fc20dedee)
 
 ## 개발자 소개
 - **개발자**: 김민석,이희우
