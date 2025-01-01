@@ -82,13 +82,11 @@ NFC 기술: Android NFC API
   <tr>
     <td>
       <h3>핸드폰 유심과의 비교</h3>
-      <img src="https://github.com/user-attachments/assets/4fcad854-424b-497c-94ad-ab9a1a21eb79
-" alt="핸드폰 유심과의 비교" width="300">
+      <img src="https://github.com/user-attachments/assets/4fcad854-424b-497c-94ad-ab9a1a21eb79" alt="핸드폰 유심과의 비교" width="300">
     </td>
     <td>
       <h3>유저모드 (학생, 사원)</h3>
-      <img src="https://github.com/user-attachments/assets/d4f94c4c-041e-40e8-8dda-5a5d0904c53e
-" alt="유저모드" width="300">
+      <img src="https://github.com/user-attachments/assets/d4f94c4c-041e-40e8-8dda-5a5d0904c53e" alt="유저모드" width="300">
     </td>
   </tr>
 </table>
